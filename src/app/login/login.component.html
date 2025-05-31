@@ -1,27 +1,46 @@
 <div class="login">
-  <div class="container" [ngClass]="{'toggle': isClaseAgregada}">
+  <div class="container" [ngClass]="{ 'toggle': isClaseAgregada }">
+
+    <!-- FORMULARIO DE INICIO DE SESIÓN -->
     <div class="container-form">
-      <form class="sign-in">
-        <h2>Iniciar Seción</h2>
+      <form class="sign-in" (ngSubmit)="usuarioAutenticado()">
+        <h2>Iniciar Sesión</h2>
         <div class="redes-sociales">
-            <i class="bi bi-facebook"></i>
-            <i class="bi bi-google"></i>
-            <i class="bi bi-twitter-x"></i>
+          <i class="bi bi-facebook"></i>
+          <i class="bi bi-google"></i>
+          <i class="bi bi-twitter-x"></i>
         </div>
         <span>Use su correo y contraseña</span>
+
         <div class="container-input">
-          <input type="email" placeholder="Email" id="loginEmail" autocomplete="off" required />
+          <input
+            type="email"
+            placeholder="Email"
+            [(ngModel)]="login.email"
+            name="email"
+            autocomplete="off"
+            required
+          />
         </div>
+
         <div class="container-input">
-          <input type="password" placeholder="Password" id="loginPassword" autocomplete="off" required />
+          <input
+            type="password"
+            placeholder="Password"
+            [(ngModel)]="login.password"
+            name="password"
+            autocomplete="off"
+            required
+          />
         </div>
+
         <a href="#">¿Olvidaste tu contraseña?</a>
-        <button class="button" (click)="usuarioAutenticado()">INICIAR SESIÓN</button>
+
+        <button class="button" type="submit">INICIAR SESIÓN</button>
       </form>
     </div>
 
-    <!-- ------------- REGISTRO -------------- -->
-
+    <!-- FORMULARIO DE REGISTRO -->
     <div class="container-form">
       <form class="sign-up">
         <h2>Registrarse</h2>
@@ -30,36 +49,47 @@
           <i class="bi bi-facebook"></i>
           <i class="bi bi-twitter-x"></i>
         </div>
-        <span>Use su correo electronico para registrarse</span>
+        <span>Use su correo electrónico para registrarse</span>
+
         <div class="container-input">
-          <input [(ngModel)]="textoCompleto"  name="nombre" (input)="filtrarPrimeraPalabra($event)" type="text" placeholder="Nombre" required/>
+          <input
+            [(ngModel)]="textoCompleto"
+            name="nombre"
+            (input)="filtrarPrimeraPalabra($event)"
+            type="text"
+            placeholder="Nombre"
+            required
+          />
         </div>
+
         <div class="container-input">
-          <input type="email" placeholder="Email" required />
+          <input type="email" name="registroEmail" placeholder="Email" required />
         </div>
+
         <div class="container-input">
-          <input type="password" placeholder="Password" required />
+          <input type="password" name="registroPassword" placeholder="Password" required />
         </div>
-        <button class="button">REGISTRARSE</button>
+
+        <button class="button" type="submit">REGISTRARSE</button>
       </form>
     </div>
 
-    <!-- -------------- BIENVENIDA -------------- -->
-
+    <!-- PANELES DE BIENVENIDA -->
     <div class="container-welcome">
       <div class="welcome-sign-up welcome">
         <h3>¡Bienvenido!</h3>
         <p>
           Ingrese sus datos personales para usar todas las funciones del sitio
         </p>
-        <button class="button" id="btn-sign-up" (click)="onSignIn()">Registrarse</button>
+        <button class="button" (click)="showLoginForm()">Registrarse</button>
       </div>
+
       <div class="welcome-sign-in welcome">
-        <h3>¡Hola{{primeraPalabra ? ', ' + primeraPalabra: ''}}!</h3>
+        <h3>¡Hola{{ primeraPalabra ? ', ' + primeraPalabra : '' }}!</h3>
         <p>
           Registre sus datos personales para usar todas las funciones del sitio
         </p>
-        <button class="button" id="btn-sign-in" (click)="onSignUp()">Iniciar Sesion</button>
+        <button class="button" (click)="showRegisterForm()">Iniciar Sesión</button>
       </div>
     </div>
   </div>

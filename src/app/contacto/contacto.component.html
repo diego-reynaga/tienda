@@ -1,0 +1,103 @@
+<nav class="navbar navbar-expand-lg bg-light shadow-sm" data-bs-theme="light">
+  <div class="container-fluid">
+    <!-- Logo / Marca -->
+    <a class="navbar-brand fw-bold text-primary" routerLink="/">TechStore</a>
+
+    <!-- Botón responsive -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Contenido del navbar -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        @if (router.url !== '/inicio') {
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/inicio'">Inicio</a>
+        </li>
+        }
+
+        @if (router.url !== '/contacto') {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/contacto" routerLinkActive="active">Contacto</a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- _______-----------------------------------____________________________________________ -->
+<!-- SECCIÓN 1 -->
+<section class="section-1">
+  <div class="container">
+    <h1>Contacta con TechStore</h1>
+    <p>¿Tienes preguntas sobre nuestros productos, necesitas soporte técnico o quieres realizar una consulta? Estamos aquí para ayudarte.</p>
+    <button class="cta-button" (click)="scrollToForm()">Envíanos un mensaje</button>
+  </div>
+</section>
+
+<!-- SECCIÓN 2 -->
+<section class="section-2" id="contactFormSection">
+  <div class="container">
+    <!-- Formulario -->
+    <div class="form-column">
+      <form (submit)="onSubmit()" #contactForm="ngForm">
+        <label for="firstName">Nombre</label>
+        <input type="text" id="firstName" name="firstName" ngModel required>
+
+        <label for="lastName">Apellido</label>
+        <input type="text" id="lastName" name="lastName" ngModel required>
+
+        <label for="email">Correo Electrónico</label>
+        <input type="email" id="email" name="email" ngModel required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+
+        <label for="message">Mensaje</label>
+        <textarea id="message" name="message" ngModel required minlength="10"></textarea>
+
+        <label>
+          <input type="checkbox" id="agree" name="agree" ngModel required>
+          Acepto los <a routerLink="/terminos-y-condiciones">Términos de servicio</a>
+        </label>
+
+        <button type="submit" class="submit-button" [disabled]="!contactForm.valid">Enviar Mensaje</button>
+
+        @if (formEnviado) {
+          <div class="u-text-success">¡Gracias! Tu mensaje ha sido enviado. Nos pondremos en contacto contigo pronto.</div>
+        }
+
+        @if (formError) {
+          <div class="u-text-danger">Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde.</div>
+        }
+      </form>
+    </div>
+
+    <!-- Mapa -->
+    <div class="map-column">
+      <iframe src="https://maps.google.com/maps?output=embed&q=Plaza%20de%20Andahuaylas%2C%20Apurimac%2C%20Peru&z=15&t=m"
+              allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 3 -->
+<section class="section-3">
+  <div class="container">
+    <div class="column">
+      <h2>Nuestra Información</h2>
+      <p>Encuentra respuestas rápidas o contáctanos directamente a través de los siguientes medios.</p>
+    </div>
+    <div class="column">
+      <p><strong>TechStore S.A. de C.V.</strong><br>Avenida Siempre Viva 742, Springfield<br>Atención principal online.</p>
+      <div class="highlight">Teléfono: +52 55 1234 5678<br>Email: contacto&#64;techstore.com</div>
+    </div>
+  </div>
+</section>

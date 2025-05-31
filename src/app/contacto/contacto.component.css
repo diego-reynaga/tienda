@@ -1,0 +1,187 @@
+/* === SECCIÓN 1: ENCABEZADO Y CTA === */
+.section-1 {
+  padding: 70px 20px;
+}
+
+.section-1 .container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.section-1 h1 {
+  font-weight: 700;
+  font-size: 4.5rem;
+  margin-bottom: 30px;
+}
+
+.section-1 p {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  max-width: 750px;
+  margin-bottom: 40px;
+}
+
+.section-1 .cta-button {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.25rem;
+  background-color: #478ac9;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 18px 43px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.section-1 .cta-button:hover {
+  background-color: #3a6fa3;
+}
+
+/* === SECCIÓN 2: FORMULARIO + MAPA === */
+.section-2 {
+  padding: 60px 20px;
+}
+
+.section-2 .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.section-2 .form-column,
+.section-2 .map-column {
+  flex: 1 1 48%;
+  min-width: 300px;
+}
+
+.form-column form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 530px;
+}
+
+.form-column label {
+  font-weight: 500;
+}
+
+.form-column input,
+.form-column textarea {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  box-sizing: border-box;
+}
+
+.form-column textarea {
+  resize: vertical;
+  border-radius: 15px;
+}
+
+.form-column .submit-button {
+  background-color: #478ac9;
+  color: white;
+  padding: 14px 32px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.3s;
+}
+
+.form-column .submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.form-column .submit-button:hover:not(:disabled) {
+  background-color: #3a6fa3;
+}
+
+.map-column iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+  border-radius: 8px;
+}
+
+/* === SECCIÓN 3: CONTACTO / DIRECCIÓN === */
+.section-3 {
+  padding: 60px 20px;
+  background-color: #f5f5f5;
+}
+
+.section-3 .container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 890px;
+  margin: 0 auto;
+}
+
+.section-3 .column {
+  flex: 1 1 45%;
+  min-width: 280px;
+}
+
+.section-3 h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.section-3 p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.section-3 .highlight {
+  color: #478ac9;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-top: 15px;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 991px) {
+  .section-1 h1 {
+    font-size: 3.75rem;
+  }
+
+  .section-3 .container,
+  .section-2 .container {
+    flex-direction: column;
+  }
+
+  .form-column,
+  .map-column,
+  .section-3 .column {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-1 h1 {
+    font-size: 3rem;
+  }
+
+  .section-1 p {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 575px) {
+  .section-1 h1 {
+    font-size: 2rem;
+  }
+
+  .section-1 .cta-button {
+    padding: 14px 30px;
+    font-size: 1rem;
+  }
+}

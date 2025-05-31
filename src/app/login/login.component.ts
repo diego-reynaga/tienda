@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,36 +10,46 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  //agrega una clase al div pricipal 'container' para que trabaje con el css
+  // Control del estado de la animación de cambio de formulario
   isClaseAgregada = false;
-  onSignUp() {
-    this.isClaseAgregada = false;
-  }
-  onSignIn() {
-    this.isClaseAgregada = true;
-  }
-  // ----------------
+
+  // Datos del formulario de login
+  login = {
+    email: '',
+    password: '',
+  };
+
+  // Control del nombre en registro
   textoCompleto = '';
   primeraPalabra = '';
 
+  constructor(private router: Router) {}
+
+  // Muestra el formulario de iniciar sesión
+  showLoginForm() {
+    this.isClaseAgregada = true;
+  }
+
+  // Muestra el formulario de registro
+  showRegisterForm() {
+    this.isClaseAgregada = false;
+  }
+
+  // Extrae la primera palabra del campo de nombre en el registro
   filtrarPrimeraPalabra(event: any) {
     const valor = event.target.value;
     this.textoCompleto = valor;
-    
-    // Extraer solo la primera palabra
-    this.primeraPalabra = valor.split(' ')[0]; 
+    this.primeraPalabra = valor.split(' ')[0];
   }
 
-  // verificar si el campo de correo y contraseña tiene datos
-  usuarioAutenticado(){
-    const email = (document.getElementById('loginEmail') as HTMLInputElement);
-    const password = (document.getElementById('loginPassword') as HTMLInputElement);
+  // Lógica de autenticación simulada
+  usuarioAutenticado() {
+    const { email, password } = this.login;
 
-    if (email.value && password.value) {
-      //un href a la pagina de inicio
-      window.location.href = 'http://localhost:4200/inicio';
+    if (email && password) {
+      // Simulación de inicio de sesión exitoso
+      this.router.navigate(['/inicio']);
     } else {
-      //alerta de error
       alert('Por favor, ingrese su correo y contraseña');
     }
   }
