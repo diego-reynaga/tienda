@@ -1,1 +1,45 @@
-<p>productos works!</p>
+<section id="actions" class="py-4 mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a href="#" class="btn btn-primary w-100"
+                data-bs-toggle="modal" 
+                data-bs-target="#agregarProductoModal">
+                    <i class="bi bi-plus-circle"></i>
+                    Añadir Producto
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- listado de productos -->
+ <section id="productos">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Listado de Productos</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>nombre</th>
+                                <th>precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- iterar la lista de productos -->
+                             @for(producto of productos; track producto) {
+                                <tr>
+                                    <td>{{ producto.nombre }} {{producto.color}}</td>
+                                    <td>{{ producto.precio | currency:'PEN':'symbol':'S' }}</td>
+                                </tr>
+                             }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+ </section>
