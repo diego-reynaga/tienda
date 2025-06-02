@@ -2,10 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { FooterInicioComponent } from "../inicio/footer-inicio/footer-inicio.component";
+import { CabeceroComponent } from "../inicio/cabecero/cabecero.component";
 
 @Component({
   selector: 'app-contacto',
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule, FooterInicioComponent, CabeceroComponent],
   templateUrl: './contacto.component.html',
   styleUrl: './contacto.component.css',
 })

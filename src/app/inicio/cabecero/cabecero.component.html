@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg shadow-sm">
+  <div class="container-fluid">
+    <!-- Logo / Marca -->
+    <a class="navbar-brand fw-bold text-primary" href="#">TechStore</a>
+
+    <!-- Botón responsive -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Contenido del navbar -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navegación izquierda -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        @if (router.url !== '/inicio') {
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/inicio'">Inicio</a>
+        </li>
+        }
+        <!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+        </li> -->
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Productos</a>
+        </li> -->
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Ofertas</a>
+        </li> -->
+        @if (router.url !== '/contacto') {
+        <li class="nav-item">
+          <a class="nav-link routerLinkActive='active'" [routerLink]="'/contacto'">Contacto</a>
+        </li>
+    }
+      </ul>
+
+      <!-- Carrito y búsqueda -->
+      <div class="d-flex align-items-center">
+        <!-- Icono carrito sin número -->
+        <a class="nav-link position-relative fs-4 me-4 text-dark" href="#">
+          <i class="bi bi-cart-fill"></i>
+        </a>
+
+        <!-- Buscador -->
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Buscar productos..."
+            aria-label="Buscar"
+          />
+          <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>

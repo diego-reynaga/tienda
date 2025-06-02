@@ -1,40 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light shadow-sm" data-bs-theme="light">
-  <div class="container-fluid">
-    <!-- Logo / Marca -->
-    <a class="navbar-brand fw-bold text-primary" routerLink="/">TechStore</a>
-
-    <!-- Botón responsive -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Contenido del navbar -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        @if (router.url !== '/inicio') {
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/inicio'">Inicio</a>
-        </li>
-        }
-
-        @if (router.url !== '/contacto') {
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/contacto" routerLinkActive="active">Contacto</a>
-          </li>
-        }
-      </ul>
-    </div>
-  </div>
-</nav>
-
+<app-cabecero></app-cabecero>
 <!-- _______-----------------------------------____________________________________________ -->
 <!-- SECCIÓN 1 -->
 <section class="section-1">
@@ -89,7 +53,7 @@
 </section>
 
 <!-- SECCIÓN 3 -->
-<section class="section-3">
+<!-- <section class="section-3">
   <div class="container">
     <div class="column">
       <h2>Nuestra Información</h2>
@@ -100,4 +64,5 @@
       <div class="highlight">Teléfono: +51 999 999 999<br>Email: contacto&#64;techstore.com</div>
     </div>
   </div>
-</section>
+</section> -->
+<app-footer-inicio></app-footer-inicio>
