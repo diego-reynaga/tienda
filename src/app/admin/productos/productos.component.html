@@ -1,45 +1,62 @@
 <section id="actions" class="py-4 mb-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <a href="#" class="btn btn-primary w-100"
-                data-bs-toggle="modal" 
-                data-bs-target="#agregarProductoModal">
-                    <i class="bi bi-plus-circle"></i>
-                    Añadir Producto
-                </a>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <a
+          href="#"
+          class="btn btn-primary w-100"
+          data-bs-toggle="modal"
+          data-bs-target="#agregarProductoModal"
+        >
+          <i class="bi bi-plus-circle"></i>
+          Añadir Producto
+        </a>
+      </div>
     </div>
+  </div>
 </section>
 <!-- listado de productos -->
- <section id="productos">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Listado de Productos</h4>
-                    </div>
-                    <table class="table table-striped">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>nombre</th>
-                                <th>precio</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- iterar la lista de productos -->
-                             @for(producto of productos; track producto) {
-                                <tr>
-                                    <td>{{ producto.nombre }} {{producto.color}}</td>
-                                    <td>{{ producto.precio | currency:'PEN':'symbol':'S' }}</td>
-                                </tr>
-                             }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<section id="productos">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-header">
+            <h4>Listado de Productos</h4>
+          </div>
+          <table class="table table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th>nombre</th>
+                <th>precio</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- iterar la lista de productos -->
+              @for(producto of productos; track producto) {
+              <tr>
+                <td>{{ producto.nombre }} {{ producto.color }}</td>
+                <td>
+                  {{
+                    producto.precio
+                      ? (producto.precio | currency : "PEN" : "symbol")
+                      : "Precio no disponible"
+                  }}
+                </td>
+                <td>
+                  <a
+                    routerLink="/producto/editar/{{ producto.id }}"
+                    class="btn btn-secondary">
+                    <i class="bi bi-pencil-square"></i> Editar
+                  </a>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
- </section>
+  </div>
+</section>

@@ -38,7 +38,11 @@
         <li class="nav-item">
           <a class="nav-link routerLinkActive='active'" [routerLink]="'/contacto'">Contacto</a>
         </li>
-    }
+        }
+        <!-- mostrar solo si es admin -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/productos">admin panel</a>
+        </li>
       </ul>
 
       <!-- Carrito y búsqueda -->

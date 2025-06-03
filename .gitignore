@@ -44,4 +44,4 @@ Thumbs.db
 
 #apis o contreseñas
 src/environments/environment.ts
-src/environments/environment.developmenr.ts
+src/environments/environment.development.ts

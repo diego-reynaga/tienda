@@ -5,8 +5,8 @@ import { Router, RouterModule } from '@angular/router';
   selector: 'app-cabecero',
   imports: [RouterModule],
   templateUrl: './cabecero.component.html',
-  styleUrl: './cabecero.component.css'
+  styleUrl: './cabecero.component.css',
 })
 export class CabeceroComponent {
-constructor(public router: Router) {}
+  constructor(public router: Router) {}
 }
