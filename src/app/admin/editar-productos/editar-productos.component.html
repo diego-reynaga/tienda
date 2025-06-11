@@ -1,1 +1,77 @@
-<p>editar-productos works!</p>
+<header id="main-header" class="py-2 bg-info text-white">
+  <!-- MODIFICAR ICONO -->
+  <h1><i class="bi bi-box-seam"></i> Editar Producto</h1>
+</header>
+<form #productoForm="ngForm" (ngSubmit)="guardar(productoForm)">
+  <!-- botones -->
+  <section id="actions" class="py-4 mb-4">
+    <div class="container d-flex justify-content-between">
+      <a [routerLink]="['/']" class="btn btn-primary">
+        <i class="bi bi-arrow-left"></i> Regresar al Inicio
+      </a>
+      <button type="submit" class="btn btn-success">
+        <i class="bi bi-check"></i> Guardar Producto
+      </button>
+      <a href="#" (click)="eliminar()" class="btn btn-danger">
+        <i class="bi bi-trash"></i> Eliminar Producto
+      </a>
+    </div>
+  </section>
+
+  <section id="details">
+    <div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h4>Editar Producto</h4>
+    </div>
+    <div class="card-body">
+      <!-- Campo Nombre -->
+      <div class="d-flex align-items-center mb-3">
+        <label for="nombre" class="form-label me-3" style="min-width: 100px">Nombre</label>
+        <div class="flex-grow-1">
+          <input type="text" id="nombre" name="nombre" class="form-control" required autocomplete="off"
+            minlength="2" [(ngModel)]="producto.nombre" #nombre="ngModel" [value]="producto.nombre">
+          @if (nombre.invalid && nombre.touched) {
+            <small class="text-danger d-block">El nombre es requerido y debe tener al menos 2 caracteres.</small>
+          }
+        </div>
+      </div>
+      <!-- Campo Descripción -->
+      <div class="d-flex align-items-center mb-3">
+        <label for="descripcion" class="form-label me-3" style="min-width: 100px">Descripción</label>
+        <div class="flex-grow-1">
+          <input type="text" id="descripcion" name="descripcion" class="form-control" required autocomplete="off"
+            minlength="5" [(ngModel)]="producto.descripcion" #descripcion="ngModel" [value]="producto.descripcion">
+          @if (descripcion.invalid && descripcion.touched) {
+            <small class="text-danger d-block">La descripción es requerida y debe tener al menos 5 caracteres.</small>
+          }
+        </div>
+      </div>
+      <!-- Campo Color -->
+      <div class="d-flex align-items-center mb-3">
+        <label for="color" class="form-label me-3" style="min-width: 100px">Color</label>
+        <div class="flex-grow-1">
+          <input type="text" id="color" name="color" class="form-control" required autocomplete="off"
+            minlength="3" [(ngModel)]="producto.color" #color="ngModel" [value]="producto.color">
+          @if (color.invalid && color.touched) {
+            <small class="text-danger d-block">El color es requerido.</small>
+          }
+        </div>
+      </div>
+      <!-- Campo Precio -->
+      <div class="d-flex align-items-center mb-3">
+        <label for="precio" class="form-label me-3" style="min-width: 100px">Precio</label>
+        <div class="flex-grow-1">
+          <input type="number" id="precio" name="precio" class="form-control" required autocomplete="off"
+            min="0.01" step="0.01" [(ngModel)]="producto.precio" #precio="ngModel" [value]="producto.precio">
+          @if (precio.invalid && precio.touched) {
+            <small class="text-danger d-block">El precio es requerido y debe ser un número positivo.</small>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </section>
+</form>

@@ -7,7 +7,8 @@ import { EditarProductosComponent } from './admin/editar-productos/editar-produc
 import { ProductosComponent } from './admin/productos/productos.component';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent, pathMatch: 'full' }, //Esta es la ruta por defecto, que se ejecuta cuando no se encuentra la ruta solicitada
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent}, //Esta es la ruta por defecto, que se ejecuta cuando no se encuentra la ruta solicitada
   { path: 'inicio', component: InicioComponent},
   { path: 'contacto', component: ContactoComponent},
   { path: 'productos', component: ProductosComponent},

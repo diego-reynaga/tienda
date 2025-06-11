@@ -1,3 +1,4 @@
+<app-cabecero />
 <section id="actions" class="py-4 mb-4">
   <div class="container">
     <div class="row">
@@ -47,7 +48,8 @@
                 <td>
                   <a
                     routerLink="/producto/editar/{{ producto.id }}"
-                    class="btn btn-secondary">
+                    class="btn btn-secondary"
+                  >
                     <i class="bi bi-pencil-square"></i> Editar
                   </a>
                 </td>
@@ -57,6 +59,165 @@
           </table>
         </div>
       </div>
+      <!-- TARJETAS LATERALES -->
+      <div class="col-md-3">
+        <!-- primera tarjeta -->
+        <div class="card text-center bg-danger text-white mb-3">
+          <div class="card-body">
+            <h3>Precio Total</h3>
+            <h4 class="display-4">
+              {{ getprecioTotal() | currency : "PEN" : "S/" }}
+            </h4>
+          </div>
+        </div>
+        <!-- segunda tarjeta -->
+        <div class="card text-center bg-success text-white mb-3">
+          <div class="card-body">
+            <h3>Total Productos</h3>
+            <h4 class="display-4">
+              <i class="bi bi-people-fill"></i>{{ productos?.length }}
+            </h4>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+<!-- modal para agregar producto -->
+<div class="modal fade" id="agregarProductoModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- encabezado del modal -->
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title">Agregar Producto</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #botonCerrar
+        ></button>
+      </div>
+      <!-- formurario para agregar producto -->
+      <form #productoForm="ngForm" (ngSubmit)="agregar(productoForm)">
+        <div class="modal-body">
+          <!-- campo de nombre -->
+          <div class="d-flex align-items-center mb-3">
+            <label for="nombre" class="form-label me-3" style="min-width: 100px"
+              >nombre</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                class="form-control"
+                required
+                autocomplete="off"
+                minlength="2"
+                [(ngModel)]="producto.nombre"
+                #nombre="ngModel"
+              />
+              @if (nombre.invalid && nombre.touched) {
+                <div class="text-danger">
+                  El nombre es requerido y debe tener al menos 2 caracteres.
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+        <!-- campo de descripción -->
+        <div class="modal-body">
+          <div class="d-flex align-items-center mb-3">
+            <label
+              for="descripcion"
+              class="form-label me-3"
+              style="min-width: 100px"
+              >Descripción</label
+            >
+            <div class="col-sm-9">
+              <input
+              type="text"
+              id="descripcion"
+              name="descripcion"
+              class="form-control"
+              autocomplete="off"
+              minlength="5"
+              [(ngModel)]="producto.descripcion"
+              #descripcion="ngModel"
+              required
+            />
+            @if (descripcion.invalid && descripcion.touched) {
+              <div class="text-danger">
+                La descripción es requerida y debe tener al menos 5 caracteres.
+              </div>
+            }
+            </div>
+          </div>
+        </div>
+        <!-- campo de color -->
+        <div class="modal-body">
+          <div class="d-flex align-items-center mb-3">
+            <label for="color" class="form-label me-3" style="min-width: 100px"
+              >Color</label
+            >
+            <div class="col-sm-9">
+              <input
+              type="text"
+              id="color"
+              name="color"
+              class="form-control"
+              autocomplete="off"
+              minlength="3"
+              [(ngModel)]="producto.color"
+              #color="ngModel"
+              required
+            />
+              @if (color.invalid && color.touched) {
+                <div class="text-danger">
+                  El color es requerido.
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+        <!-- campo de precio -->
+        <div class="modal-body">
+          <div class="d-flex align-items-center mb-3">
+            <label for="precio" class="form-label me-3" style="min-width: 100px"
+              >Precio</label
+            >
+            <div class="col-sm-9">
+              <input
+              type="number"
+              id="precio"
+              name="precio"
+              class="form-control"
+              required
+              autocomplete="off"
+              min="0.01"
+              step="0.01"
+              [(ngModel)]="producto.precio"
+              #precio="ngModel"
+              required
+            />
+              @if (precio.invalid && precio.touched) {
+                <div class="text-danger">
+                  El precio es requerido y debe ser un número positivo.
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+        <!-- footer del modal con el boton de guardar -->
+        <div class="modal-footer">
+          <button 
+          type="submit" 
+          class="btn btn-primary"
+          [disabled]="productoForm.invalid"
+          >Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

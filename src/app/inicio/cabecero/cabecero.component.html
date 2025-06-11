@@ -36,19 +36,42 @@
         </li> -->
         @if (router.url !== '/contacto') {
         <li class="nav-item">
-          <a class="nav-link routerLinkActive='active'" [routerLink]="'/contacto'">Contacto</a>
+          <a
+            class="nav-link routerLinkActive='active'"
+            [routerLink]="'/contacto'"
+            >Contacto</a
+          >
         </li>
-        }
-        <!-- mostrar solo si es admin -->
+        } 
+        @if (isLoggedIn) { 
+          @if (router.url !== '/productos') {
         <li class="nav-item">
           <a class="nav-link" routerLink="/productos">admin panel</a>
         </li>
+          }
+        }
+      </ul>
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        @if (!isLoggedIn) {
+        <li class="nav-item px-4">
+          <a class="nav-link" [routerLink]="['/login']">
+            <i class="bi bi-person"></i> Login
+          </a>
+        </li>
+        }
+        @if (isLoggedIn) {
+        <li class="nav-item px-4">
+          <a style="cursor: pointer;" (click)="logout()" class="nav-link">
+            <i class="bi bi-box-arrow-rigth"></i> Salir
+          </a>
+        </li>
+        }
       </ul>
 
       <!-- Carrito y búsqueda -->
       <div class="d-flex align-items-center">
         <!-- Icono carrito sin número -->
-        <a class="nav-link position-relative fs-4 me-4 text-dark" href="#">
+        <a class="nav-link position-relative fs-4 me-4 text-primary">
           <i class="bi bi-cart-fill"></i>
         </a>
 
