@@ -26,7 +26,7 @@ export class ProductoService {
   }
 
   getProducto(id: string): Observable<Producto | null>{
-    const productoDocRef = doc(this.firestore, `productos/${id}`);
+    const productoDocRef = doc(this.firestore, `Productos/${id}`);
     return docData(productoDocRef, {idField: 'id'}) as Observable<Producto>;
   }
 }
