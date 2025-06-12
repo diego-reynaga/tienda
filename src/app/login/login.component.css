@@ -71,6 +71,7 @@
     padding: 0 15px;
     background-color: #eee;
     caret-color: deeppink;
+    position: relative; /* Añadido para el posicionamiento del icono */
 }
 .container-input input{
     width: 100%;

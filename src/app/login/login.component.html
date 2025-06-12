@@ -1,7 +1,5 @@
-
 <div class="login">
-  <div class="container" [ngClass]="{ 'toggle': isClaseAgregada }">
-
+  <div class="container" [ngClass]="{ toggle: isClaseAgregada }">
     <!-- FORMULARIO DE INICIO DE SESIÓN -->
     <div class="container-form">
       <form class="sign-in" (submit)="login()">
@@ -27,7 +25,7 @@
 
         <div class="container-input">
           <input
-            type="password"
+            [type]="mostrarPassword ? 'text' : 'password'"
             placeholder="Password"
             name="password"
             [(ngModel)]="password"
@@ -35,11 +33,28 @@
             required
             class="text text-black"
           />
+          @if (password) {
+          <i
+            class="bi"
+            [ngClass]="mostrarPassword ? 'bi-eye-slash' : 'bi-eye'"
+            (click)="togglePasswordVisibility()"
+            style="
+              cursor: pointer;
+              position: absolute;
+              right: 10px;
+              top: 50%;
+              transform: translateY(-50%);
+            "
+          ></i>
+
+          }
         </div>
 
-        <a href="#">¿Olvidaste tu contraseña?</a>
+        <a>¿Olvidaste tu contraseña?</a>
 
-        <button class="button" type="submit">INICIAR SESIÓN</button>
+        <button class="button" type="submit">
+          <i class="bi bi-box-arrow-in-right"></i> INICIAR SESIÓN
+        </button>
       </form>
     </div>
 
@@ -52,7 +67,9 @@
           <i class="bi bi-facebook"></i>
           <i class="bi bi-twitter-x"></i>
         </div>
-        <span class="text text-black">Use su correo electrónico para registrarse</span>
+        <span class="text text-black"
+          >Use su correo electrónico para registrarse</span
+        >
 
         <div class="container-input">
           <input
@@ -67,11 +84,23 @@
         </div>
 
         <div class="container-input">
-          <input type="email" name="registroEmail" placeholder="Email" required class="text text-black"/>
+          <input
+            type="email"
+            name="registroEmail"
+            placeholder="Email"
+            required
+            class="text text-black"
+          />
         </div>
 
         <div class="container-input">
-          <input type="password" name="registroPassword" placeholder="Password" required class="text text-black"/>
+          <input
+            type="password"
+            name="registroPassword"
+            placeholder="Password"
+            required
+            class="text text-black"
+          />
         </div>
 
         <button class="button" type="submit">REGISTRARSE</button>
@@ -89,39 +118,14 @@
       </div>
 
       <div class="welcome-sign-in welcome">
-        <h3>¡Hola{{ primeraPalabra ? ', ' + primeraPalabra : '' }}!</h3>
+        <h3>¡Hola{{ primeraPalabra ? ", " + primeraPalabra : "" }}!</h3>
         <p>
           Registre sus datos personales para usar todas las funciones del sitio
         </p>
-        <button class="button" (click)="showRegisterForm()">Iniciar Sesión</button>
+        <button class="button" (click)="showRegisterForm()">
+          Iniciar Sesión
+        </button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- login para celulares a partir de 780px -->
- <!-- @if (isMobileView) {
-   <div>
-    <p>Bienvenido a la versión para móviles</p>
-  </div>
-} -->
-
-<!-- Añade esto al final de tu archivo login.component.html -->
-<!-- <div class="modal fade" id="mensajeModal" tabindex="-1" aria-labelledby="mensajeModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" [ngClass]="{'bg-danger text-white': !loginExitoso, 'bg-success text-white': loginExitoso}">
-        <h5 class="modal-title" id="mensajeModalLabel">{{ loginExitoso ? 'Éxito' : 'Error' }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>{{ mensaje }}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn" 
-                [ngClass]="{'btn-danger': !loginExitoso, 'btn-success': loginExitoso}" 
-                data-bs-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div> -->

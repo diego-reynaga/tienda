@@ -19,6 +19,11 @@ export class LoginComponent {
   password: string = '';
   mensaje: string | null = null;
 
+  // Variable para controlar la visibilidad de la contraseña
+  mostrarPassword = false;
+
+
+
   // Control del nombre en registro
   textoCompleto = '';
   primeraPalabra = '';
@@ -52,6 +57,11 @@ export class LoginComponent {
     const valor = event.target.value;
     this.textoCompleto = valor;
     this.primeraPalabra = valor.split(' ')[0];
+  }
+
+  // Función para alternar la visibilidad de la contraseña
+  togglePasswordVisibility(): void {
+    this.mostrarPassword = !this.mostrarPassword;
   }
 
   login(){
