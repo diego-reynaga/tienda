@@ -27,7 +27,6 @@ export class EditarProductosComponent {
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log('[EditarProductosComponent] ID obtenido de la ruta:', this.id);
     if (this.id) {
       this.productosServicio
         .getProducto(this.id)
@@ -45,10 +44,18 @@ export class EditarProductosComponent {
     }
   }
 
-  guardar(_t8: NgForm) {
-    throw new Error('Method not implemented.');
+  guardar(productoForm: NgForm) {
+    const {value, valid} = productoForm;
+    if (valid) {
+      value.id = this.id;
+      this.productosServicio.modificarProducto(value);
+      this.router.navigate(['/productos']);
+    }
   }
   eliminar() {
-    throw new Error('Method not implemented.');
+    if(confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+        this.productosServicio.eliminarProducto(this.producto);
+        this.router.navigate(['/productos']);
+    }
   }
 }
