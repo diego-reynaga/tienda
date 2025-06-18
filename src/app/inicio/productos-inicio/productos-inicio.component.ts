@@ -12,7 +12,7 @@ export class ProductosInicioComponent {
       titulo: 'Laptops y Computadoras',
       descripcion:
         'Explora las mejores opciones en equipos de alto rendimiento.',
-      imagen: 'telefonol.webp',
+      imagen: 'laptops.jpg',
     },
     {
       titulo: 'Accesorios Tecnológicos',

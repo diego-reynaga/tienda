@@ -1,0 +1,7 @@
+#diseñps{
+    /* background-color: white; */
+    /* border: 5px solid red; */
+    height: 500px;
+    clip-path: polygon(evenodd, 100% 0, 0 0, 0 100%, 100% 80%);
+
+}
