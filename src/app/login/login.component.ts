@@ -19,6 +19,11 @@ export class LoginComponent {
   password: string = '';
   mensaje: string | null = null;
 
+    // Variables para registro
+  nombre: string = '';
+  registroEmail: string = '';
+  registroPassword: string = '';
+
   // Variable para controlar la visibilidad de la contraseña
   mostrarPassword = false;
 
@@ -109,4 +114,77 @@ export class LoginComponent {
       alert(this.mensaje);
     }
   }
+
+  // Método para el registro de usuarios
+  register() {
+    if(this.nombre && this.registroEmail && this.registroPassword) {
+      this.loginService.register(this.nombre, this.registroEmail, this.registroPassword)
+        .then(result => {
+          console.log('Registro exitoso:', result);
+          // Mostrar mensaje de éxito
+          alert('¡Registro exitoso! Ya puedes iniciar sesión.');
+          // Cambiar al formulario de login
+          this.showLoginForm();
+        })
+        .catch(error => {
+          console.error('Error en registro:', error);
+          
+          // Mostrar mensaje de error más descriptivo
+          if (error.code) {
+            switch(error.code) {
+              case 'auth/email-already-in-use':
+                this.mensaje = 'Este correo electrónico ya está en uso.';
+                break;
+              case 'auth/invalid-email':
+                this.mensaje = 'El formato del correo electrónico no es válido.';
+                break;
+              case 'auth/weak-password':
+                this.mensaje = 'La contraseña es demasiado débil. Debe tener al menos 6 caracteres.';
+                break;
+              default:
+                this.mensaje = 'Error al registrarse: ' + error.message;
+                break;
+            }
+          } else {
+            this.mensaje = 'Error al registrarse: ' + error;
+          }
+          
+          alert(this.mensaje);
+        });
+    } else {
+      this.mensaje = 'Por favor complete todos los campos requeridos';
+      alert(this.mensaje);
+    }
+  }
+
+
+  // Método para iniciar sesión con Google
+  loginWithGoogle() {
+    this.loginService.loginGoogle()
+      .then(result => {
+        console.log('Login con Google exitoso:', result);
+        this.router.navigate(['/']);
+      })
+      .catch(error => {
+        console.error('Error en login con Google:', error);
+        this.mensaje = 'Error al iniciar sesión con Google: ' + error.message;
+        alert(this.mensaje);
+      });
+  }
+
+  // Método para iniciar sesión con Facebook
+  loginWithFacebook() {
+    this.loginService.loginFacebook()
+      .then(result => {
+        console.log('Login con Facebook exitoso:', result);
+        this.router.navigate(['/']);
+      })
+      .catch(error => {
+        console.error('Error en login con Facebook:', error);
+        this.mensaje = 'Error al iniciar sesión con Facebook: ' + error.message;
+        alert(this.mensaje);
+      });
+  }
+
+  
 }
