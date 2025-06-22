@@ -6,6 +6,7 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { EditarProductosComponent } from './admin/editar-productos/editar-productos.component';
 import { ProductosComponent } from './admin/productos/productos.component';
 import { CelularesComponent } from './inicio/celulares/celulares.component';
+import { AudioVideoComponent } from './inicio/audio-video/audio-video.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -15,5 +16,6 @@ export const routes: Routes = [
   { path: 'productos', component: ProductosComponent},
   { path: 'producto/editar/:id', component: EditarProductosComponent},
   { path: 'celulares', component: CelularesComponent},
+  { path: 'audio-video', component: AudioVideoComponent},
   { path: '**', component: NotFoundComponent }, //Este es la ruta comodín, que se ejecuta cuando no se encuentra la ruta solicitada
 ];

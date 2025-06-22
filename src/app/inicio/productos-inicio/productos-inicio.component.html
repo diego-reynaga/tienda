@@ -24,7 +24,7 @@
             <div class="card-body">
               <h5 class="card-title">{{ categoria.titulo }}</h5>
               <p class="card-text text-muted small">{{ categoria.descripcion }}</p>
-              <a class="btn btn-outline-primary w-100">Ver más</a>
+              <a [routerLink]="categoria.ruta" class="btn btn-outline-primary w-100">Ver más</a>
             </div>
           </div>
         </div>
