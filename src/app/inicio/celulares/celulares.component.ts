@@ -1,50 +1,72 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProductoResumen } from '../../modelo/producto.modelo';
+import { CELULARES_DATOS, CELULARES_DETALLES } from './celulares-datos';
 import { CabeceroComponent } from '../cabecero/cabecero.component';
 import { FooterInicioComponent } from '../footer-inicio/footer-inicio.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-celulares',
+  standalone: true,
+  imports: [CommonModule, CabeceroComponent, FooterInicioComponent],
   templateUrl: './celulares.component.html',
   styleUrls: ['./celulares.component.css'],
-  standalone: true, // Agregar standalone: true para Angular 20+
-  imports: [CommonModule, CabeceroComponent, FooterInicioComponent, FormsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CelularesComponent {
-  activeModal = signal<string>('');
-  activeDetails = signal<string>('');
+  celulares: ProductoResumen[] = CELULARES_DATOS;
+  celularesDetalles: Record<string, {
+    titulo: string;
+    descripcion: string;
+    especificaciones: {
+      pantalla: string;
+      chip: string;
+      bateria: string;
+      camara: string;
+      almacenamiento: string;
+      resistencia: string;
+    };
+  }> = CELULARES_DETALLES;
 
-  phones = [
-    { id: 'iphone15promax', name: 'iPhone 15 Pro Max', brand: 'apple' },
-    { id: 'galaxys23ultra', name: 'Galaxy S23 Ultra', brand: 'samsung' },
-    { id: 'xiaomi13pro', name: 'Xiaomi 13 Pro', brand: 'xiaomi' },
-    { id: 'pixel7pro', name: 'Google Pixel 7 Pro', brand: 'google' }
-  ];
+  private modalActivo = signal('');
+  private detallesActivos = signal('');
 
-  // Abrir modal de "Saber más"
-  openModal(brand: string): void {
-    this.activeModal.set(brand);
-    document.body.style.overflow = 'hidden'; // Prevenir scroll
+  activeModal() {
+    return this.modalActivo();
   }
 
-  // Cerrar modal de "Saber más"
-  closeModal(): void {
-    this.activeModal.set('');
-    document.body.style.overflow = 'auto'; // Restaurar scroll
+  activeDetails() {
+    return this.detallesActivos();
   }
 
-  // Abrir modal de detalles técnicos
-  openDetails(brand: string): void {
-    this.activeDetails.set(brand);
-    document.body.style.overflow = 'hidden'; // Prevenir scroll
+  openModal(id: string) {
+    this.modalActivo.set(id);
   }
 
-  // Cerrar modal de detalles técnicos
-  closeDetails(): void {
-    this.activeDetails.set('');
-    document.body.style.overflow = 'auto'; // Restaurar scroll
+  closeModal() {
+    this.modalActivo.set('');
+  }
+
+  openDetails(id: string) {
+    this.detallesActivos.set(id);
+  }
+
+  closeDetails() {
+    this.detallesActivos.set('');
+  }
+
+  getDetalles(id: string) {
+    return this.celularesDetalles[id];
+  }
+
+  getEspecificacion(id: string, key: 'pantalla' | 'chip' | 'bateria' | 'camara' | 'almacenamiento' | 'resistencia'): string {
+    const especificaciones = this.celularesDetalles[id]?.especificaciones;
+    return especificaciones ? especificaciones[key] : '';
+  }
+
+  getEspecificacionKeys(): Array<'pantalla' | 'chip' | 'bateria' | 'camara' | 'almacenamiento' | 'resistencia'> {
+    return ['pantalla', 'chip', 'bateria', 'camara', 'almacenamiento', 'resistencia'];
   }
 }
