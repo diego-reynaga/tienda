@@ -39,6 +39,7 @@ export class ProductosInicioComponent {
       descripcion: 'Relojes inteligentes y dispositivos portables.',
       imagen: 'Smartwatches.webp',
       ruta: '/wearables'
+          // <spline-viewer url="https://prod.spline.design/jhxdRiBtWIfrWbY4/scene.splinecode"></spline-viewer>
     },
     {
       titulo: 'Tablets',

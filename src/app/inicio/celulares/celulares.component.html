@@ -1,47 +1,943 @@
 <!-- Cabecero - siempre visible en la parte superior -->
 <app-cabecero/>
 
-<!-- Primera sección - ajustada para dejar espacio al cabecero -->
-<div class="container text-center min-vh-100 d-flex align-items-center justify-content-center py-5">
-  <div class="row w-100">
-    <!-- Columna para el texto y el botón -->
-    <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
-      <p class="fs-4 fw-bold">iPhone 15 Pro Max</p>
-      <button class="btn btn-primary px-4 py-2">Comprar</button>
+<!-- Primera sección - iPhone -->
+<div class="hero-section section-apple min-vh-100 d-flex align-items-center justify-content-center position-relative overflow-hidden">
+  <div class="background-gradient"></div>
+  <div class="container py-5">
+    <div class="row w-100 align-items-center">
+      <!-- Columna para el texto y el botón con animaciones -->
+      <div class="col-md-6 d-flex flex-column align-items-start text-start fade-in-left">
+        <div class="brand-badge mb-2">
+          <img src="assets/brands/apple-logo.png" alt="Apple" class="brand-icon me-2"> Apple
+        </div>
+        <h1 class="display-4 fw-bold mb-2">iPhone 15 Pro Max</h1>
+        <p class="lead mb-4">Experimenta el futuro de la tecnología móvil con un rendimiento extraordinario y un diseño impecable.</p>
+        <div class="d-flex gap-3">
+          <button class="btn btn-primary btn-lg px-4 py-2 rounded-pill animate-pulse">
+            <i class="bi bi-bag-fill me-2"></i>Comprar ahora
+          </button>
+          <button class="btn btn-outline-light btn-lg px-4 py-2 rounded-pill" (click)="openModal('apple')">
+            <i class="bi bi-info-circle me-2"></i>Saber más
+          </button>
+        </div>
+        <div class="specs-highlights mt-5">
+          <div class="d-flex gap-4">
+            <div class="spec-item text-center">
+              <i class="bi bi-cpu-fill fs-2"></i>
+              <p>A17 Pro</p>
+            </div>
+            <div class="spec-item text-center">
+              <i class="bi bi-camera-fill fs-2"></i>
+              <p>48MP</p>
+            </div>
+            <div class="spec-item text-center">
+              <i class="bi bi-battery-full fs-2"></i>
+              <p>Todo el día</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Columna para el diseño Spline con efecto flotante -->
+      <div class="col-md-6 d-flex align-items-center justify-content-center position-relative fade-in-right">
+        <div class="phone-model-container">
+          <spline-viewer url="https://prod.spline.design/CaMctRXxsBbf1Ibx/scene.splinecode" class="floating"></spline-viewer>
+        </div>
+      </div>
     </div>
-    <!-- Columna para el diseño Spline -->
-    <div id="diseñps" class="col-md-6 d-flex align-items-center justify-content-center">
-      <spline-viewer url="https://prod.spline.design/CaMctRXxsBbf1Ibx/scene.splinecode"></spline-viewer>
-      <!-- 
-      fekeboh931@betzenn.com ???????????
-      -->
+  </div>
+  <!-- Indicador de desplazamiento solo en la primera sección -->
+  <div class="scroll-indicator">
+    <div class="mouse">
+      <div class="wheel"></div>
+    </div>
+    <p>Desplaza para descubrir</p>
+  </div>
+</div>
+
+<!-- Segunda sección - Samsung -->
+<div class="hero-section section-samsung min-vh-100 d-flex align-items-center justify-content-center position-relative overflow-hidden">
+  <div class="background-gradient"></div>
+  <div class="container py-5">
+    <div class="row w-100 align-items-center">
+      <!-- Columna para el texto y el botón con animaciones -->
+      <div class="col-md-6 d-flex flex-column align-items-start text-start fade-in-left">
+        <div class="brand-badge mb-2 samsung-badge">
+          <img src="assets/brands/samsung-logo.png" alt="Samsung" class="brand-icon me-2"> Samsung
+        </div>
+        <h1 class="display-4 fw-bold mb-2">Galaxy S23 Ultra</h1>
+        <p class="lead mb-4">Redefine los límites con la cámara más avanzada de Samsung y un rendimiento sin precedentes.</p>
+        <div class="d-flex gap-3">
+          <button class="btn btn-primary btn-lg px-4 py-2 rounded-pill animate-pulse samsung-btn">
+            <i class="bi bi-bag-fill me-2"></i>Comprar ahora
+          </button>
+          <button class="btn btn-outline-light btn-lg px-4 py-2 rounded-pill" (click)="openModal('samsung')">
+            <i class="bi bi-info-circle me-2"></i>Saber más
+          </button>
+        </div>
+        <div class="specs-highlights mt-5">
+          <div class="d-flex gap-4">
+            <div class="spec-item text-center">
+              <i class="bi bi-cpu-fill fs-2"></i>
+              <p>Snapdragon 8 Gen 2</p>
+            </div>
+            <div class="spec-item text-center">
+              <i class="bi bi-camera-fill fs-2"></i>
+              <p>200MP</p>
+            </div>
+            <div class="spec-item text-center">
+              <i class="bi bi-battery-full fs-2"></i>
+              <p>5000mAh</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Columna para el diseño Spline con efecto flotante -->
+      <div class="col-md-6 d-flex align-items-center justify-content-center position-relative fade-in-right">
+        <div class="phone-model-container">
+          <spline-viewer url="https://prod.spline.design/CaMctRXxsBbf1Ibx/scene.splinecode" class="floating"></spline-viewer>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Segunda sección - aparece al hacer scroll -->
-<div class="container text-center min-vh-100 d-flex align-items-center justify-content-center py-5">
-  <div class="row w-100">
-    <div class="col d-flex align-items-center justify-content-center">
-      Column2
-    </div>
-    <div class="col d-flex align-items-center justify-content-center">
-      column2
+<!-- Tercera sección - Xiaomi -->
+<div class="hero-section section-xiaomi min-vh-100 d-flex align-items-center justify-content-center position-relative overflow-hidden">
+  <div class="background-gradient"></div>
+  <div class="container py-5">
+    <div class="row w-100 align-items-center">
+      <!-- Columna para el texto y el botón con animaciones -->
+      <div class="col-md-6 d-flex flex-column align-items-start text-start fade-in-left">
+        <div class="brand-badge mb-2 xiaomi-badge">
+          <img src="assets/brands/xiaomi-logo.png" alt="Xiaomi" class="brand-icon me-2"> Xiaomi
+        </div>
+        <h1 class="display-4 fw-bold mb-2">Xiaomi 13 Pro</h1>
+        <p class="lead mb-4">Fotografía profesional con óptica Leica y rendimiento excepcional con un precio inigualable.</p>
+        <div class="d-flex gap-3">
+          <button class="btn btn-primary btn-lg px-4 py-2 rounded-pill animate-pulse xiaomi-btn">
+            <i class="bi bi-bag-fill me-2"></i>Comprar ahora
+          </button>
+          <button class="btn btn-outline-light btn-lg px-4 py-2 rounded-pill" (click)="openModal('xiaomi')">
+            <i class="bi bi-info-circle me-2"></i>Saber más
+          </button>
+        </div>
+        <div class="specs-highlights mt-5">
+          <div class="d-flex gap-4">
+            <div class="spec-item text-center">
+              <i class="bi bi-cpu-fill fs-2"></i>
+              <p>Snapdragon 8 Gen 2</p>
+            </div>
+            <div class="spec-item text-center">
+              <i class="bi bi-camera-fill fs-2"></i>
+              <p>50MP Leica</p>
+            </div>
+            <div class="spec-item text-center">
+              <i class="bi bi-battery-full fs-2"></i>
+              <p>4820mAh</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Columna para el diseño Spline con efecto flotante -->
+      <div class="col-md-6 d-flex align-items-center justify-content-center position-relative fade-in-right">
+        <div class="phone-model-container">
+          <spline-viewer url="https://prod.spline.design/CaMctRXxsBbf1Ibx/scene.splinecode" class="floating"></spline-viewer>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- tercera sección - aparece al hacer scroll -->
-<div class="container text-center min-vh-100 d-flex align-items-center justify-content-center py-5">
-  <div class="row w-100">
-    <div class="col d-flex align-items-center justify-content-center">
-      Column2
+<!-- Cuarta sección - Google Pixel -->
+<div class="hero-section section-google min-vh-100 d-flex align-items-center justify-content-center position-relative overflow-hidden">
+  <div class="background-gradient"></div>
+  <div class="container py-5">
+    <div class="row w-100 align-items-center">
+      <!-- Columna para el texto y el botón con animaciones -->
+      <div class="col-md-6 d-flex flex-column align-items-start text-start fade-in-left">
+        <div class="brand-badge mb-2 google-badge">
+          <img src="assets/brands/google-logo.png" alt="Google" class="brand-icon me-2"> Google
+        </div>
+        <h1 class="display-4 fw-bold mb-2">Pixel 7 Pro</h1>
+        <p class="lead mb-4">La experiencia Android definitiva con IA avanzada y fotografía computacional líder en el mercado.</p>
+        <div class="d-flex gap-3">
+          <button class="btn btn-primary btn-lg px-4 py-2 rounded-pill animate-pulse google-btn">
+            <i class="bi bi-bag-fill me-2"></i>Comprar ahora
+          </button>
+          <button class="btn btn-outline-light btn-lg px-4 py-2 rounded-pill" (click)="openModal('google')">
+            <i class="bi bi-info-circle me-2"></i>Saber más
+          </button>
+        </div>
+        <div class="specs-highlights mt-5">
+          <div class="d-flex gap-4">
+            <div class="spec-item text-center">
+              <i class="bi bi-cpu-fill fs-2"></i>
+              <p>Google Tensor G2</p>
+            </div>
+            <div class="spec-item text-center">
+              <i class="bi bi-camera-fill fs-2"></i>
+              <p>50MP</p>
+            </div>
+            <div class="spec-item text-center">
+              <i class="bi bi-lightbulb-fill fs-2"></i>
+              <p>Google IA</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Columna para el diseño Spline con efecto flotante -->
+      <div class="col-md-6 d-flex align-items-center justify-content-center position-relative fade-in-right">
+        <div class="phone-model-container">
+          <spline-viewer url="https://prod.spline.design/CaMctRXxsBbf1Ibx/scene.splinecode" class="floating"></spline-viewer>
+        </div>
+      </div>
     </div>
-    <div class="col d-flex align-items-center justify-content-center">
-      <spline-viewer url="https://prod.spline.design/jhxdRiBtWIfrWbY4/scene.splinecode"></spline-viewer>
+  </div>
+</div>
+
+<!-- Sección de comparativa final (sin botón "Ver todos los modelos") -->
+<div class="comparison-section min-vh-100 d-flex align-items-center justify-content-center py-5">
+  <div class="container">
+    <h2 class="text-center mb-5 fade-in-up">Comparativa de modelos premium</h2>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <div class="col fade-in-up" data-delay="0.1">
+        <div class="comparison-card">
+          <div class="brand-icon-top">
+            <img src="assets/brands/apple-logo.png" alt="Apple" class="img-fluid">
+          </div>
+          <div class="phone-image">
+            <img src="assets/phones/iphone15pro.png" alt="iPhone 15 Pro" class="img-fluid">
+          </div>
+          <h3>iPhone 15 Pro Max</h3>
+          <p class="price">$1,199</p>
+          <ul class="specs-list">
+            <li>Chip A17 Pro</li>
+            <li>Cámara 48MP</li>
+            <li>6.7" Super Retina XDR</li>
+            <li>Titanio de grado aeroespacial</li>
+          </ul>
+          <button class="btn btn-outline-primary w-100" (click)="openDetails('apple')">Ver detalles</button>
+        </div>
+      </div>
+      <div class="col fade-in-up" data-delay="0.2">
+        <div class="comparison-card">
+          <div class="brand-icon-top">
+            <img src="assets/brands/samsung-logo.png" alt="Samsung" class="img-fluid">
+          </div>
+          <div class="phone-image">
+            <img src="assets/phones/s23ultra.png" alt="Samsung S23 Ultra" class="img-fluid">
+          </div>
+          <h3>Galaxy S23 Ultra</h3>
+          <p class="price">$1,199</p>
+          <ul class="specs-list">
+            <li>Snapdragon 8 Gen 2</li>
+            <li>Cámara 200MP</li>
+            <li>6.8" Dynamic AMOLED 2X</li>
+            <li>S Pen incluido</li>
+          </ul>
+          <button class="btn btn-outline-primary w-100" (click)="openDetails('samsung')">Ver detalles</button>
+        </div>
+      </div>
+      <div class="col fade-in-up" data-delay="0.3">
+        <div class="comparison-card">
+          <div class="brand-icon-top">
+            <img src="assets/brands/xiaomi-logo.png" alt="Xiaomi" class="img-fluid">
+          </div>
+          <div class="phone-image">
+            <img src="assets/phones/xiaomi13pro.png" alt="Xiaomi 13 Pro" class="img-fluid">
+          </div>
+          <h3>Xiaomi 13 Pro</h3>
+          <p class="price">$899</p>
+          <ul class="specs-list">
+            <li>Snapdragon 8 Gen 2</li>
+            <li>Cámara Leica 50MP</li>
+            <li>6.73" AMOLED 2K</li>
+            <li>Carga 120W HyperCharge</li>
+          </ul>
+          <button class="btn btn-outline-primary w-100" (click)="openDetails('xiaomi')">Ver detalles</button>
+        </div>
+      </div>
+      <div class="col fade-in-up" data-delay="0.4">
+        <div class="comparison-card">
+          <div class="brand-icon-top">
+            <img src="assets/brands/google-logo.png" alt="Google" class="img-fluid">
+          </div>
+          <div class="phone-image">
+            <img src="assets/phones/pixel7pro.png" alt="Google Pixel 7 Pro" class="img-fluid">
+          </div>
+          <h3>Google Pixel 7 Pro</h3>
+          <p class="price">$899</p>
+          <ul class="specs-list">
+            <li>Google Tensor G2</li>
+            <li>Cámara 50MP</li>
+            <li>6.7" LTPO OLED</li>
+            <li>Android puro</li>
+          </ul>
+          <button class="btn btn-outline-primary w-100" (click)="openDetails('google')">Ver detalles</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- Pie de página - siempre visible en la parte inferior -->
 <app-footer-inicio/>
+
+<!-- Modal para "Saber más" -->
+<div class="modal-overlay" [ngClass]="{'active': activeModal() !== ''}" (click)="closeModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <!-- Modal para iPhone -->
+    <div class="modal-content" [ngClass]="{'active': activeModal() === 'apple'}">
+      <div class="modal-header apple-gradient">
+        <div class="modal-brand-badge">
+          <img src="assets/brands/apple-logo.png" alt="Apple" class="me-2"> iPhone 15 Pro Max
+        </div>
+        <button class="modal-close-btn" (click)="closeModal()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="modal-image-container">
+              <img src="assets/phones/iphone15pro-large.png" alt="iPhone 15 Pro Max" class="img-fluid">
+            </div>
+            <div class="color-options d-flex justify-content-center my-3 gap-2">
+              <button class="color-option active" style="background-color: #3B3B3D;"></button>
+              <button class="color-option" style="background-color: #F9E5C9;"></button>
+              <button class="color-option" style="background-color: #7D7E80;"></button>
+              <button class="color-option" style="background-color: #574F41;"></button>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <h3>Titanio. Tan fuerte. Tan ligero. Tan Pro.</h3>
+            <p class="feature-text">iPhone 15 Pro está fabricado con titanio de calidad aeroespacial, el mismo que se utiliza en naves espaciales enviadas a Marte.</p>
+            <div class="specs-grid">
+              <div class="spec-item">
+                <span class="spec-label">Pantalla</span>
+                <span class="spec-value">Super Retina XDR 6.7"</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Chip</span>
+                <span class="spec-value">A17 Pro con GPU de 6 núcleos</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Batería</span>
+                <span class="spec-value">Hasta 29 horas de video</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Cámara</span>
+                <span class="spec-value">Sistema Pro 48MP</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Almacenamiento</span>
+                <span class="spec-value">128GB, 256GB, 512GB, 1TB</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Resistencia</span>
+                <span class="spec-value">IP68 (6m hasta 30 min)</span>
+              </div>
+            </div>
+            <div class="price-container mt-4">
+              <p class="price-tag">Desde $1,199</p>
+              <button class="btn btn-primary btn-lg px-4 rounded-pill">
+                <i class="bi bi-bag-fill me-2"></i>Comprar ahora
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal para Samsung -->
+    <div class="modal-content" [ngClass]="{'active': activeModal() === 'samsung'}">
+      <div class="modal-header samsung-gradient">
+        <div class="modal-brand-badge">
+          <img src="assets/brands/samsung-logo.png" alt="Samsung" class="me-2"> Galaxy S23 Ultra
+        </div>
+        <button class="modal-close-btn" (click)="closeModal()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="modal-image-container">
+              <img src="assets/phones/s23ultra-large.png" alt="Samsung S23 Ultra" class="img-fluid">
+            </div>
+            <div class="color-options d-flex justify-content-center my-3 gap-2">
+              <button class="color-option active" style="background-color: #101820;"></button>
+              <button class="color-option" style="background-color: #F6F6F6;"></button>
+              <button class="color-option" style="background-color: #8A8A8D;"></button>
+              <button class="color-option" style="background-color: #574F41;"></button>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <h3>El poder de lo inesperado</h3>
+            <p class="feature-text">Con un diseño que desafía lo convencional y un rendimiento que supera expectativas.</p>
+            <div class="specs-grid">
+              <div class="spec-item">
+                <span class="spec-label">Pantalla</span>
+                <span class="spec-value">6.8" Dynamic AMOLED 2X</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Chip</span>
+                <span class="spec-value">Snapdragon 8 Gen 2</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Batería</span>
+                <span class="spec-value">5000mAh</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Cámara</span>
+                <span class="spec-value">200MP cuádruple</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Almacenamiento</span>
+                <span class="spec-value">256GB, 512GB, 1TB</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Resistencia</span>
+                <span class="spec-value">IP68 (1.5m hasta 30 min)</span>
+              </div>
+            </div>
+            <div class="price-container mt-4">
+              <p class="price-tag">Desde $1,199</p>
+              <button class="btn btn-primary btn-lg px-4 rounded-pill">
+                <i class="bi bi-bag-fill me-2"></i>Comprar ahora
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal para Xiaomi -->
+    <div class="modal-content" [ngClass]="{'active': activeModal() === 'xiaomi'}">
+      <div class="modal-header xiaomi-gradient">
+        <div class="modal-brand-badge">
+          <img src="assets/brands/xiaomi-logo.png" alt="Xiaomi" class="me-2"> Xiaomi 13 Pro
+        </div>
+        <button class="modal-close-btn" (click)="closeModal()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="modal-image-container">
+              <img src="assets/phones/xiaomi13pro-large.png" alt="Xiaomi 13 Pro" class="img-fluid">
+            </div>
+            <div class="color-options d-flex justify-content-center my-3 gap-2">
+              <button class="color-option active" style="background-color: #101820;"></button>
+              <button class="color-option" style="background-color: #F6F6F6;"></button>
+              <button class="color-option" style="background-color: #8A8A8D;"></button>
+              <button class="color-option" style="background-color: #574F41;"></button>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <h3>Fotografía profesional, rendimiento excepcional</h3>
+            <p class="feature-text">Captura el mundo como un profesional con la óptica Leica y el potente Snapdragon 8 Gen 2.</p>
+            <div class="specs-grid">
+              <div class="spec-item">
+                <span class="spec-label">Pantalla</span>
+                <span class="spec-value">6.73" AMOLED 2K</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Chip</span>
+                <span class="spec-value">Snapdragon 8 Gen 2</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Batería</span>
+                <span class="spec-value">4820mAh</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Cámara</span>
+                <span class="spec-value">50MP Leica</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Almacenamiento</span>
+                <span class="spec-value">256GB, 512GB, 1TB</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Resistencia</span>
+                <span class="spec-value">IP68 (1.5m hasta 30 min)</span>
+              </div>
+            </div>
+            <div class="price-container mt-4">
+              <p class="price-tag">Desde $899</p>
+              <button class="btn btn-primary btn-lg px-4 rounded-pill">
+                <i class="bi bi-bag-fill me-2"></i>Comprar ahora
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal para Google Pixel -->
+    <div class="modal-content" [ngClass]="{'active': activeModal() === 'google'}">
+      <div class="modal-header google-gradient">
+        <div class="modal-brand-badge">
+          <img src="assets/brands/google-logo.png" alt="Google" class="me-2"> Pixel 7 Pro
+        </div>
+        <button class="modal-close-btn" (click)="closeModal()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="modal-image-container">
+              <img src="assets/phones/pixel7pro-large.png" alt="Google Pixel 7 Pro" class="img-fluid">
+            </div>
+            <div class="color-options d-flex justify-content-center my-3 gap-2">
+              <button class="color-option active" style="background-color: #101820;"></button>
+              <button class="color-option" style="background-color: #F6F6F6;"></button>
+              <button class="color-option" style="background-color: #8A8A8D;"></button>
+              <button class="color-option" style="background-color: #574F41;"></button>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <h3>La experiencia Android definitiva</h3>
+            <p class="feature-text">Disfruta de la velocidad de Google Tensor G2 y captura imágenes impresionantes con la cámara de 50MP.</p>
+            <div class="specs-grid">
+              <div class="spec-item">
+                <span class="spec-label">Pantalla</span>
+                <span class="spec-value">6.7" LTPO OLED</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Chip</span>
+                <span class="spec-value">Google Tensor G2</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Batería</span>
+                <span class="spec-value">5000mAh</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Cámara</span>
+                <span class="spec-value">50MP</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Almacenamiento</span>
+                <span class="spec-value">128GB, 256GB</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Resistencia</span>
+                <span class="spec-value">IP68 (1.5m hasta 30 min)</span>
+              </div>
+            </div>
+            <div class="price-container mt-4">
+              <p class="price-tag">Desde $899</p>
+              <button class="btn btn-primary btn-lg px-4 rounded-pill">
+                <i class="bi bi-bag-fill me-2"></i>Comprar ahora
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para "Ver detalles" (especificaciones técnicas) -->
+<div class="details-overlay" [ngClass]="{'active': activeDetails() !== ''}" (click)="closeDetails()">
+  <div class="details-container" (click)="$event.stopPropagation()">
+    <!-- Detalles para iPhone -->
+    <div class="details-content" [ngClass]="{'active': activeDetails() === 'apple'}">
+      <div class="details-header apple-gradient">
+        <h4>Especificaciones iPhone 15 Pro Max</h4>
+        <button class="details-close-btn" (click)="closeDetails()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="details-body">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Columna izquierda de especificaciones -->
+            <div class="spec-group">
+              <h5>Pantalla</h5>
+              <div class="spec-row">
+                <span class="spec-name">Tipo</span>
+                <span class="spec-value">Super Retina XDR OLED</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Tamaño</span>
+                <span class="spec-value">6.7 pulgadas</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Resolución</span>
+                <span class="spec-value">2796 x 1290 píxeles</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Densidad</span>
+                <span class="spec-value">460 ppi</span>
+              </div>
+            </div>
+            
+            <div class="spec-group">
+              <h5>Procesador y Memoria</h5>
+              <div class="spec-row">
+                <span class="spec-name">Chip</span>
+                <span class="spec-value">A17 Pro</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">RAM</span>
+                <span class="spec-value">8 GB</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Almacenamiento</span>
+                <span class="spec-value">128/256/512 GB/1 TB</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <!-- Columna derecha de especificaciones -->
+            <div class="spec-group">
+              <h5>Cámaras</h5>
+              <div class="spec-row">
+                <span class="spec-name">Principal</span>
+                <span class="spec-value">48 MP, f/1.8, OIS</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Ultra angular</span>
+                <span class="spec-value">12 MP, f/2.2, 120°</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Telefoto</span>
+                <span class="spec-value">12 MP, f/2.8, 5x zoom óptico</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Frontal</span>
+                <span class="spec-value">12 MP, f/1.9</span>
+              </div>
+            </div>
+            
+            <div class="spec-group">
+              <h5>Batería</h5>
+              <div class="spec-row">
+                <span class="spec-name">Capacidad</span>
+                <span class="spec-value">4422 mAh</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Carga rápida</span>
+                <span class="spec-value">27W, 50% en 30 min</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Carga inalámbrica</span>
+                <span class="spec-value">15W MagSafe</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-4">
+          <button class="btn btn-primary rounded-pill px-4">
+            <i class="bi bi-download me-2"></i>Descargar ficha técnica completa
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Detalles para Samsung -->
+    <div class="details-content" [ngClass]="{'active': activeDetails() === 'samsung'}">
+      <div class="details-header samsung-gradient">
+        <h4>Especificaciones Galaxy S23 Ultra</h4>
+        <button class="details-close-btn" (click)="closeDetails()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="details-body">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Columna izquierda de especificaciones -->
+            <div class="spec-group">
+              <h5>Pantalla</h5>
+              <div class="spec-row">
+                <span class="spec-name">Tipo</span>
+                <span class="spec-value">Dynamic AMOLED 2X</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Tamaño</span>
+                <span class="spec-value">6.8 pulgadas</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Resolución</span>
+                <span class="spec-value">3088 x 1440 píxeles</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Densidad</span>
+                <span class="spec-value">500 ppi</span>
+              </div>
+            </div>
+            
+            <div class="spec-group">
+              <h5>Procesador y Memoria</h5>
+              <div class="spec-row">
+                <span class="spec-name">Chip</span>
+                <span class="spec-value">Snapdragon 8 Gen 2</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">RAM</span>
+                <span class="spec-value">8/12 GB</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Almacenamiento</span>
+                <span class="spec-value">256GB, 512GB, 1TB</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <!-- Columna derecha de especificaciones -->
+            <div class="spec-group">
+              <h5>Cámaras</h5>
+              <div class="spec-row">
+                <span class="spec-name">Principal</span>
+                <span class="spec-value">200 MP, f/1.7, OIS</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Ultra angular</span>
+                <span class="spec-value">12 MP, f/2.2, 120°</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Telefoto</span>
+                <span class="spec-value">10 MP, f/2.4, 3x zoom óptico</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Periscopio</span>
+                <span class="spec-value">10 MP, f/4.9, 10x zoom óptico</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Frontal</span>
+                <span class="spec-value">12 MP, f/2.2</span>
+              </div>
+            </div>
+            
+            <div class="spec-group">
+              <h5>Batería</h5>
+              <div class="spec-row">
+                <span class="spec-name">Capacidad</span>
+                <span class="spec-value">5000 mAh</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Carga rápida</span>
+                <span class="spec-value">45W, 70% en 30 min</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Carga inalámbrica</span>
+                <span class="spec-value">15W</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-4">
+          <button class="btn btn-primary rounded-pill px-4">
+            <i class="bi bi-download me-2"></i>Descargar ficha técnica completa
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Detalles para Xiaomi -->
+    <div class="details-content" [ngClass]="{'active': activeDetails() === 'xiaomi'}">
+      <div class="details-header xiaomi-gradient">
+        <h4>Especificaciones Xiaomi 13 Pro</h4>
+        <button class="details-close-btn" (click)="closeDetails()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="details-body">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Columna izquierda de especificaciones -->
+            <div class="spec-group">
+              <h5>Pantalla</h5>
+              <div class="spec-row">
+                <span class="spec-name">Tipo</span>
+                <span class="spec-value">AMOLED 2K</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Tamaño</span>
+                <span class="spec-value">6.73 pulgadas</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Resolución</span>
+                <span class="spec-value">3200 x 1440 píxeles</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Densidad</span>
+                <span class="spec-value">522 ppi</span>
+              </div>
+            </div>
+            
+            <div class="spec-group">
+              <h5>Procesador y Memoria</h5>
+              <div class="spec-row">
+                <span class="spec-name">Chip</span>
+                <span class="spec-value">Snapdragon 8 Gen 2</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">RAM</span>
+                <span class="spec-value">12 GB</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Almacenamiento</span>
+                <span class="spec-value">256GB, 512GB, 1TB</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <!-- Columna derecha de especificaciones -->
+            <div class="spec-group">
+              <h5>Cámaras</h5>
+              <div class="spec-row">
+                <span class="spec-name">Principal</span>
+                <span class="spec-value">50 MP, f/1.9, OIS</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Ultra angular</span>
+                <span class="spec-value">50 MP, f/2.2, 115°</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Telefoto</span>
+                <span class="spec-value">50 MP, f/2.0, 3.2x zoom óptico</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Macro</span>
+                <span class="spec-value">50 MP, f/2.4</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Frontal</span>
+                <span class="spec-value">32 MP, f/2.0</span>
+              </div>
+            </div>
+            
+            <div class="spec-group">
+              <h5>Batería</h5>
+              <div class="spec-row">
+                <span class="spec-name">Capacidad</span>
+                <span class="spec-value">4820 mAh</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Carga rápida</span>
+                <span class="spec-value">120W, 100% en 19 min</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Carga inalámbrica</span>
+                <span class="spec-value">50W</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-4">
+          <button class="btn btn-primary rounded-pill px-4">
+            <i class="bi bi-download me-2"></i>Descargar ficha técnica completa
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Detalles para Google Pixel -->
+    <div class="details-content" [ngClass]="{'active': activeDetails() === 'google'}">
+      <div class="details-header google-gradient">
+        <h4>Especificaciones Google Pixel 7 Pro</h4>
+        <button class="details-close-btn" (click)="closeDetails()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="details-body">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Columna izquierda de especificaciones -->
+            <div class="spec-group">
+              <h5>Pantalla</h5>
+              <div class="spec-row">
+                <span class="spec-name">Tipo</span>
+                <span class="spec-value">LTPO OLED</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Tamaño</span>
+                <span class="spec-value">6.7 pulgadas</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Resolución</span>
+                <span class="spec-value">3120 x 1440 píxeles</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Densidad</span>
+                <span class="spec-value">512 ppi</span>
+              </div>
+            </div>
+            
+            <div class="spec-group">
+              <h5>Procesador y Memoria</h5>
+              <div class="spec-row">
+                <span class="spec-name">Chip</span>
+                <span class="spec-value">Google Tensor G2</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">RAM</span>
+                <span class="spec-value">12 GB</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Almacenamiento</span>
+                <span class="spec-value">128GB, 256GB</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <!-- Columna derecha de especificaciones -->
+            <div class="spec-group">
+              <h5>Cámaras</h5>
+              <div class="spec-row">
+                <span class="spec-name">Principal</span>
+                <span class="spec-value">50 MP, f/1.9, OIS</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Ultra angular</span>
+                <span class="spec-value">12 MP, f/2.2, 120°</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Telefoto</span>
+                <span class="spec-value">48 MP, f/3.5, 5x zoom óptico</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Frontal</span>
+                <span class="spec-value">10.8 MP, f/2.2</span>
+              </div>
+            </div>
+            
+            <div class="spec-group">
+              <h5>Batería</h5>
+              <div class="spec-row">
+                <span class="spec-name">Capacidad</span>
+                <span class="spec-value">5000 mAh</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Carga rápida</span>
+                <span class="spec-value">30W, 50% en 30 min</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-name">Carga inalámbrica</span>
+                <span class="spec-value">23W</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-4">
+          <button class="btn btn-primary rounded-pill px-4">
+            <i class="bi bi-download me-2"></i>Descargar ficha técnica completa
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
