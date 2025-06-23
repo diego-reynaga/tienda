@@ -1,0 +1,109 @@
+<app-cabecero/>
+
+<div class="wearables-container">
+  <!-- Sección de producto destacado con Spline -->
+  <div class="featured-product">
+    <div class="row align-items-center">
+      <div id="spline-container" class="col-lg-8">
+        <spline-viewer url="https://prod.spline.design/jhxdRiBtWIfrWbY4/scene.splinecode"></spline-viewer>
+      </div>
+      <div class="col-lg-4 featured-info">
+        <span class="product-badge">DESTACADO</span>
+        <h1 class="product-title">Galaxy Watch</h1>
+        <h1 class="product-subtitle">Ultra Premium</h1>
+        <p class="product-description">
+          Monitoriza tu salud, recibe notificaciones y personaliza tu experiencia con el smartwatch más avanzado del mercado.
+        </p>
+        <div class="features">
+          <div class="feature"><i class="fas fa-heartbeat"></i> Monitor cardíaco</div>
+          <div class="feature"><i class="fas fa-running"></i> GPS integrado</div>
+          <div class="feature"><i class="fas fa-tint"></i> Resistencia al agua 50m</div>
+        </div>
+        <div class="price-tag">$399.99</div>
+        <div class="actions">
+          <button type="button" class="btn-comprar">
+            <i class="fas fa-shopping-cart"></i> Comprar
+          </button>
+          <button type="button" class="btn-details">
+            <i class="fas fa-info-circle"></i> Más información
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Sección de productos wearables -->
+  <div class="products-section">
+    <h2 class="section-title">Wearables y Smartwatches</h2>
+    
+    <div class="search-filter">
+      <input type="text" placeholder="Buscar dispositivos..." [(ngModel)]="searchTerm" class="search-input">
+      <select [(ngModel)]="filterByType" class="filter-select">
+        <option value="">Todos los tipos</option>
+        @for (type of deviceTypes; track type) {
+          <option [value]="type">{{ type }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="products-grid">
+      @if (filteredWearables.length > 0) {
+        @for (device of filteredWearables; track device.id) {
+          <div class="device-card">
+            <div class="device-image">
+              <img [src]="device.imageUrl" [alt]="device.name">
+              @if (device.discount > 0) {
+                <span class="discount-badge">-{{ device.discount }}%</span>
+              }
+              @if (device.new) {
+                <span class="new-badge">NUEVO</span>
+              }
+            </div>
+            <div class="device-info">
+              <span class="type-badge">{{ device.type }}</span>
+              <h3>{{ device.name }}</h3>
+              <div class="compatibility">
+                @if (device.compatibility) {
+                  @for (platform of device.compatibility; track platform) {
+                    <span class="compat-icon">
+                      @if (platform === 'iOS') {
+                        <i class="fab fa-apple"></i>
+                      } @else if (platform === 'Android') {
+                        <i class="fab fa-android"></i>
+                      } @else {
+                        <i class="fab fa-windows"></i>
+                      }
+                    </span>
+                  }
+                }
+              </div>
+              <ul class="specs-list">
+                @for (feature of device.features.slice(0, 3); track feature) {
+                  <li><i class="fas fa-check-circle"></i> {{ feature }}</li>
+                }
+              </ul>
+              <div class="price-section">
+                @if (device.discount > 0 && device.originalPrice) {
+                  <span class="original-price">${{ device.originalPrice.toFixed(2) }}</span>
+                  <span class="current-price">${{ device.price.toFixed(2) }}</span>
+                } @else {
+                  <span class="current-price">${{ device.price.toFixed(2) }}</span>
+                }
+              </div>
+              <button class="add-to-cart-btn">
+                <i class="fas fa-shopping-cart"></i> Añadir al carrito
+              </button>
+            </div>
+          </div>
+        }
+      } @else {
+        <div class="no-results">
+          <i class="fas fa-search"></i>
+          <p>No se encontraron dispositivos que coincidan con tu búsqueda.</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<app-footer-inicio/>

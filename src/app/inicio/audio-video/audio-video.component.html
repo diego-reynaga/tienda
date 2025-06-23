@@ -1,26 +1,89 @@
 <app-cabecero/>
-<spline-viewer url="https://prod.spline.design/PlrpkmrQFKPe9EeB/scene.splinecode"></spline-viewer>
-<div class="row w-100 align-items-center">
-    <!-- -------------------------- -->
-    <div id="spline-border" class="col-md-8">
-      <!-- <img src="audifono.png" class="d-block img-fluid" style="max-height: 400px" alt="..."/> -->
-      <spline-viewer
-        id="imagen3d"
-        url="https://prod.spline.design/I9ZebOpq23BaQJdx/scene.splinecode"
-      ></spline-viewer>
-      <!-- 
-      fekeboh931
-      fekeboh931@betzenn.com
-       -->
-    </div>
-    <div class="col-md-4 text-center">
-      <h1 class="fw-bold">Auriculares</h1>
-      <h1 class="fw-bold">Elek - A56</h1>
-      <div class="mt-4">
-        <button type="button" class="btn btn-primary btn-lg shadow mx-2">
-          Comprar
-        </button>
+
+<div class="audio-video-container dark-theme">
+  <!-- Sección de producto destacado con Spline -->
+  <div class="featured-product">
+    <div class="row w-100 align-items-center">
+      <div id="spline-border" class="col-md-8">
+        <spline-viewer
+          id="imagen3d"
+          url="https://prod.spline.design/I9ZebOpq23BaQJdx/scene.splinecode"
+        ></spline-viewer>
+      </div>
+      <div class="col-md-4 featured-info">
+        <span class="product-badge">NUEVO</span>
+        <h1 class="product-title">Auriculares</h1>
+        <h1 class="product-subtitle">Elek - A56</h1>
+        <p class="product-description">
+          Disfruta de un sonido inmersivo con cancelación de ruido activa y hasta 30 horas de batería.
+        </p>
+        <div class="price-tag">$299.99</div>
+        <div class="mt-4">
+          <button type="button" class="btn-comprar">
+            <i class="fas fa-shopping-cart"></i> Comprar
+          </button>
+        </div>
       </div>
     </div>
   </div>
+  
+  <!-- Sección de lista de productos -->
+  <div class="products-section">
+    <h2 class="section-title">Productos de Audio y Video</h2>
+    
+    <div class="search-filter">
+      <input type="text" placeholder="Buscar productos..." [(ngModel)]="searchTerm" class="search-input">
+      <select [(ngModel)]="selectedCategory" class="filter-select">
+        <option value="">Todas las categorías</option>
+        @for (category of categories; track category) {
+          <option [value]="category">{{ category }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="products-grid">
+      @if (filteredProducts.length > 0) {
+        @for (product of filteredProducts; track product.id) {
+          <div class="product-card">
+            <div class="product-image">
+              <img [src]="product.imageUrl" [alt]="product.name">
+              @if (product.discount > 0) {
+                <span class="discount-badge">-{{ product.discount }}%</span>
+              }
+            </div>
+            <div class="product-info">
+              <span class="category-tag">{{ product.category }}</span>
+              <h3>{{ product.name }}</h3>
+              <div class="rating">
+                <div class="stars">
+                  @for (star of [1,2,3,4,5]; track star) {
+                    <i [class]="star <= product.rating ? 'fas fa-star' : 'far fa-star'"></i>
+                  }
+                </div>
+                <span class="reviews">({{ product.reviews }})</span>
+              </div>
+              <div class="price-section">
+                @if (product.discount > 0 && product.originalPrice) {
+                  <span class="original-price">${{ product.originalPrice.toFixed(2) }}</span>
+                  <span class="current-price">${{ product.price.toFixed(2) }}</span>
+                } @else {
+                  <span class="current-price">${{ product.price.toFixed(2) }}</span>
+                }
+              </div>
+              <button class="add-to-cart-btn">
+                <i class="fas fa-shopping-cart"></i> Añadir al carrito
+              </button>
+            </div>
+          </div>
+        }
+      } @else {
+        <div class="no-results">
+          <i class="fas fa-search"></i>
+          <p>No se encontraron productos que coincidan con tu búsqueda.</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
 <app-footer-inicio/>

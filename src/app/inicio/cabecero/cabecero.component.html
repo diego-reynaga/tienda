@@ -51,6 +51,24 @@
           }
         }
       </ul>
+      <!-- Carrito y búsqueda -->
+      <div class="d-flex align-items-center">
+        <!-- Icono carrito sin número -->
+        <a class="nav-link position-relative fs-4 me-4 text-primary">
+          <i class="bi bi-cart-fill"></i>
+        </a>
+
+        <!-- Buscador -->
+        <!-- <form class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Buscar productos..."
+            aria-label="Buscar"
+          />
+          <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        </form> -->
+      </div>
       <ul class="navbar-nav mb-2 mb-lg-0">
         @if (!isLoggedIn) {
         <li class="nav-item px-4">
@@ -67,25 +85,6 @@
         </li>
         }
       </ul>
-
-      <!-- Carrito y búsqueda -->
-      <div class="d-flex align-items-center">
-        <!-- Icono carrito sin número -->
-        <a class="nav-link position-relative fs-4 me-4 text-primary">
-          <i class="bi bi-cart-fill"></i>
-        </a>
-
-        <!-- Buscador -->
-        <form class="d-flex" role="search">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Buscar productos..."
-            aria-label="Buscar"
-          />
-          <button class="btn btn-outline-primary" type="submit">Buscar</button>
-        </form>
-      </div>
     </div>
   </div>
 </nav>

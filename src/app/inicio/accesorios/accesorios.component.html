@@ -1,0 +1,60 @@
+<app-cabecero/>
+<div class="accessories-container">
+  <h2 class="section-title">Accesorios Tecnológicos</h2>
+  <p class="section-subtitle">Encuentra mouse, teclados, cargadores y más.</p>
+  
+  <div class="filter-container">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar accesorio..." class="search-input">
+    <select [(ngModel)]="selectedCategory" class="category-select">
+      <option value="">Todas las categorías</option>
+      @for (category of categories; track category) {
+        <option [value]="category">{{ category }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="accessories-grid">
+    @if (filteredAccessories.length > 0) {
+      @for (accessory of filteredAccessories; track accessory.id) {
+        <div class="accessory-card">
+          <div class="accessory-image">
+            <img [src]="accessory.imageUrl" [alt]="accessory.name">
+            @if (accessory.discount > 0) {
+              <span class="discount-badge">-{{ accessory.discount }}%</span>
+            }
+          </div>
+          <div class="accessory-info">
+            <span class="category-tag">{{ accessory.category }}</span>
+            <h3>{{ accessory.name }}</h3>
+            <div class="rating">
+              <span class="stars">
+                @for (star of [1,2,3,4,5]; track star) {
+                  <i [class]="star <= accessory.rating ? 'fas fa-star' : 'far fa-star'"></i>
+                }
+              </span>
+              <span class="reviews">({{ accessory.reviews }})</span>
+            </div>
+            <div class="price-section">
+              @if (accessory.discount > 0 && accessory.originalPrice) {
+                <span class="original-price">${{ accessory.originalPrice.toFixed(2) }}</span>
+                <span class="current-price">${{ accessory.price.toFixed(2) }}</span>
+              } @else {
+                <span class="current-price">${{ accessory.price.toFixed(2) }}</span>
+              }
+            </div>
+            <button class="add-to-cart-btn">
+              <i class="fas fa-shopping-cart"></i>
+              Añadir al carrito
+            </button>
+          </div>
+        </div>
+      }
+    } @else {
+      <div class="no-results">
+        <i class="fas fa-search"></i>
+        <p>No se encontraron accesorios que coincidan con tu búsqueda.</p>
+      </div>
+    }
+  </div>
+</div>
+<app-footer-inicio/>

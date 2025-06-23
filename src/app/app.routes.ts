@@ -7,6 +7,13 @@ import { EditarProductosComponent } from './admin/editar-productos/editar-produc
 import { ProductosComponent } from './admin/productos/productos.component';
 import { CelularesComponent } from './inicio/celulares/celulares.component';
 import { AudioVideoComponent } from './inicio/audio-video/audio-video.component';
+import { LaptopsComponent } from './inicio/laptops/laptops.component';
+import { AccesoriosComponent } from './inicio/accesorios/accesorios.component';
+import { WearablesComponent } from './inicio/wearables/wearables.component';
+import { DronesComponent } from './inicio/drones/drones.component';
+import { GamingComponent } from './inicio/gaming/gaming.component';
+import { TabletsComponent } from './inicio/tablets/tablets.component';
+import { CamarasComponent } from './inicio/camaras/camaras.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -17,5 +24,12 @@ export const routes: Routes = [
   { path: 'producto/editar/:id', component: EditarProductosComponent},
   { path: 'celulares', component: CelularesComponent},
   { path: 'audio-video', component: AudioVideoComponent},
+  { path: 'laptops', component: LaptopsComponent},
+  { path: 'accesorios', component: AccesoriosComponent},
+  { path: 'wearables', component: WearablesComponent},
+  {path: 'drones', component: DronesComponent},
+  { path: 'gaming', component: GamingComponent},
+  { path: 'tablets', component: TabletsComponent},
+  { path: 'camaras', component: CamarasComponent},
   { path: '**', component: NotFoundComponent }, //Este es la ruta comodín, que se ejecuta cuando no se encuentra la ruta solicitada
 ];

@@ -1,0 +1,118 @@
+<app-cabecero/>
+
+<!-- Portada de pantalla completa con Spline -->
+<div class="hero-section">
+  <div class="spline-container">
+    <spline-viewer url="https://prod.spline.design/dZuX4D0Njy3VPDRp/scene.splinecode"></spline-viewer>
+  </div>
+</div>
+
+<!-- Contenedor principal -->
+<div class="drones-container">
+  <!-- Producto destacado -->
+  <section class="featured-product">
+    <h2 class="section-title">Producto Destacado</h2>
+    <div class="featured-product-content">
+      <div class="featured-image">
+        <img src="assets/images/drones/dji-mavic-3-pro.jpg" alt="DJI Mavic 3 Pro">
+      </div>
+      <div class="featured-details">
+        <span class="featured-tag">BEST SELLER</span>
+        <h3 class="featured-title">DJI Mavic 3 Pro</h3>
+        <div class="rating">
+          <span class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </span>
+          <span class="reviews">(128 reseñas)</span>
+        </div>
+        <div class="features-list">
+          <div class="feature-item">
+            <i class="fas fa-camera"></i>
+            <span>Triple cámara Hasselblad</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-clock"></i>
+            <span>43 minutos de vuelo</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-route"></i>
+            <span>15 km de alcance</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-video"></i>
+            <span>Grabación 5.1K 50fps</span>
+          </div>
+        </div>
+        <div class="featured-price">
+          <span class="original-price">$2,199.99</span>
+          <span class="current-price">$1,999.99</span>
+        </div>
+        <div class="featured-actions">
+          <button class="buy-now-btn">Comprar ahora</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Lista de productos -->
+  <section class="products-section">
+    <div class="section-header">
+      <h2 class="section-title">Nuestra colección de drones</h2>
+      <div class="filters">
+        <input type="text" placeholder="Buscar drones..." [(ngModel)]="searchTerm" class="search-input">
+        <select [(ngModel)]="selectedCategory" class="filter-select">
+          <option value="">Todas las categorías</option>
+          @for (category of categories; track category) {
+            <option [value]="category">{{ category }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="products-grid">
+      @if (filteredDrones.length > 0) {
+        @for (drone of filteredDrones; track drone.id) {
+          <div class="drone-card">
+            <div class="drone-image">
+              <img [src]="drone.imageUrl" [alt]="drone.name">
+              @if (drone.discount > 0) {
+                <span class="discount-badge">-{{ drone.discount }}%</span>
+              }
+            </div>
+            <div class="drone-info">
+              <span class="category-badge">{{ drone.category }}</span>
+              <h3>{{ drone.name }}</h3>
+              <div class="specs">
+                <span><i class="fas fa-video"></i> {{ drone.camera }}</span>
+                <span><i class="fas fa-battery-full"></i> {{ drone.flightTime }}</span>
+                <span><i class="fas fa-route"></i> {{ drone.range }}</span>
+              </div>
+              <div class="price-section">
+                @if (drone.discount > 0 && drone.originalPrice) {
+                  <span class="original-price">${{ drone.originalPrice.toFixed(2) }}</span>
+                  <span class="current-price">${{ drone.price.toFixed(2) }}</span>
+                } @else {
+                  <span class="current-price">${{ drone.price.toFixed(2) }}</span>
+                }
+              </div>
+              <button class="add-cart-btn">
+                <i class="fas fa-shopping-cart"></i> Añadir al carrito
+              </button>
+            </div>
+          </div>
+        }
+      } @else {
+        <div class="no-results">
+          <i class="fas fa-drone"></i>
+          <p>No se encontraron drones que coincidan con tu búsqueda.</p>
+        </div>
+      }
+    </div>
+  </section>
+</div>
+
+<app-footer-inicio/>

@@ -1,0 +1,129 @@
+<app-cabecero/>
+
+<div class="gaming-container">
+  <!-- Banner Hero -->
+  <div class="gaming-hero">
+    <div class="gaming-hero-content">
+      <h1 class="hero-title">GAMING <span class="hero-highlight">ZONE</span></h1>
+      <p class="hero-subtitle">PlayStation, Xbox, Nintendo y todo para gamers</p>
+    </div>
+    <div class="console-icons">
+      <div class="console-icon playstation"><i class="fab fa-playstation"></i></div>
+      <div class="console-icon xbox"><i class="fab fa-xbox"></i></div>
+      <div class="console-icon nintendo"><i class="fab fa-nintendo-switch"></i></div>
+    </div>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filter-section">
+    <div class="search-filter">
+      <input type="text" placeholder="Buscar productos gaming..." [(ngModel)]="searchTerm" class="search-input">
+      <select [(ngModel)]="selectedPlatform" class="filter-select">
+        <option value="">Todas las plataformas</option>
+        @for (platform of platforms; track platform) {
+          <option [value]="platform">{{ platform }}</option>
+        }
+      </select>
+      <select [(ngModel)]="selectedCategory" class="filter-select">
+        <option value="">Todas las categorías</option>
+        @for (category of categories; track category) {
+          <option [value]="category">{{ category }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <!-- Destacados -->
+  <div class="featured-section">
+    <h2 class="section-title">Destacados <span class="neon-text">HOT!</span></h2>
+    <div class="featured-products">
+      @for (product of featuredProducts; track product.id) {
+        <div class="featured-card">
+          <div class="featured-image">
+            <img [src]="product.imageUrl" [alt]="product.name">
+            @if (product.discount > 0) {
+              <span class="discount-badge">-{{ product.discount }}%</span>
+            }
+            @if (product.new) {
+              <span class="new-badge">NUEVO</span>
+            }
+          </div>
+          <div class="featured-info">
+            <div class="platform-badge {{ product.platform.toLowerCase() }}">
+              <span>{{ product.platform }}</span>
+            </div>
+            <h3>{{ product.name }}</h3>
+            <div class="rating">
+              @for (star of [1,2,3,4,5]; track star) {
+                <i [class]="star <= product.rating ? 'fas fa-star' : 'far fa-star'"></i>
+              }
+              <span>({{ product.reviews }})</span>
+            </div>
+            <div class="price-section">
+              @if (product.discount > 0 && product.originalPrice) {
+                <span class="original-price">${{ product.originalPrice.toFixed(2) }}</span>
+                <span class="current-price">${{ product.price.toFixed(2) }}</span>
+              } @else {
+                <span class="current-price">${{ product.price.toFixed(2) }}</span>
+              }
+            </div>
+            <button class="buy-now-btn">Comprar ahora</button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Todos los productos -->
+  <div class="products-section">
+    <h2 class="section-title">Todos los productos</h2>
+    
+    <div class="products-grid">
+      @if (filteredProducts.length > 0) {
+        @for (product of filteredProducts; track product.id) {
+          <div class="product-card">
+            <div class="product-image">
+              <img [src]="product.imageUrl" [alt]="product.name">
+              @if (product.discount > 0) {
+                <span class="discount-badge">-{{ product.discount }}%</span>
+              }
+              <div class="platform-icon {{ product.platform.toLowerCase() }}">
+                @if (product.platform === 'PlayStation') {
+                  <i class="fab fa-playstation"></i>
+                } @else if (product.platform === 'Xbox') {
+                  <i class="fab fa-xbox"></i>
+                } @else if (product.platform === 'Nintendo') {
+                  <i class="fab fa-nintendo-switch"></i>
+                } @else {
+                  <i class="fas fa-desktop"></i>
+                }
+              </div>
+            </div>
+            <div class="product-info">
+              <span class="category-tag">{{ product.category }}</span>
+              <h3>{{ product.name }}</h3>
+              <div class="price-section">
+                @if (product.discount > 0 && product.originalPrice) {
+                  <span class="original-price">${{ product.originalPrice.toFixed(2) }}</span>
+                  <span class="current-price">${{ product.price.toFixed(2) }}</span>
+                } @else {
+                  <span class="current-price">${{ product.price.toFixed(2) }}</span>
+                }
+              </div>
+              <button class="add-to-cart-btn">
+                <i class="fas fa-shopping-cart"></i> Añadir al carrito
+              </button>
+            </div>
+          </div>
+        }
+      } @else {
+        <div class="no-results">
+          <i class="fas fa-gamepad"></i>
+          <p>No se encontraron productos gaming que coincidan con tu búsqueda.</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<app-footer-inicio/>

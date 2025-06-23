@@ -60,8 +60,8 @@ export class ProductosInicioComponent {
       ruta: '/gaming'
     },
     {
-      titulo: 'Drones y Gadgets',
-      descripcion: 'Equipos innovadores para fotografía y exploración.',
+      titulo: 'Drones',
+      descripcion: 'Equipos innovadores para exploración.',
       imagen: 'drones.webp',
       ruta: '/drones'
     },

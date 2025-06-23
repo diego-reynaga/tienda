@@ -1,0 +1,52 @@
+<app-cabecero/>
+<div class="laptop-container dark-theme">
+  <h2 class="section-title">Laptops Destacadas</h2>
+  
+  <div class="search-filter">
+    <input type="text" placeholder="Buscar laptop..." [(ngModel)]="searchTerm" class="search-input">
+    <select [(ngModel)]="filterByBrand" class="filter-select">
+      <option value="">Todas las marcas</option>
+      @for (brand of brands; track brand) {
+        <option [value]="brand">{{ brand }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="laptops-grid">
+    @if (filteredLaptops.length > 0) {
+      @for (laptop of filteredLaptops; track laptop.id) {
+        <div class="laptop-card">
+          <div class="laptop-image">
+            <img [src]="laptop.imageUrl" [alt]="laptop.name">
+            @if (laptop.discount) {
+              <span class="discount-badge">-{{ laptop.discount }}%</span>
+            }
+          </div>
+          <div class="laptop-info">
+            <h3>{{ laptop.name }}</h3>
+            <p class="laptop-brand">{{ laptop.brand }}</p>
+            <div class="specs">
+              <span><i class="fas fa-microchip"></i> {{ laptop.processor }}</span>
+              <span><i class="fas fa-memory"></i> {{ laptop.ram }}</span>
+              <span><i class="fas fa-hdd"></i> {{ laptop.storage }}</span>
+            </div>
+            <div class="price-section">
+              @if (laptop.discount) {
+                <p class="original-price">${{ laptop.originalPrice }}</p>
+                <p class="current-price">${{ laptop.price }}</p>
+              } @else {
+                <p class="current-price">${{ laptop.price }}</p>
+              }
+            </div>
+            <button class="add-to-cart-btn">Añadir al carrito</button>
+          </div>
+        </div>
+      }
+    } @else {
+      <div class="no-results">
+        <p>No se encontraron laptops que coincidan con tu búsqueda.</p>
+      </div>
+    }
+  </div>
+</div>
+<app-footer-inicio/>

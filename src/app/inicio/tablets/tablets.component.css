@@ -1,0 +1,271 @@
+/* Estilos para componente de Tablets */
+:root {
+  --primary-color: #009688;
+  --primary-gradient: linear-gradient(135deg, #009688, #4DB6AC);
+  --dark-bg: #121212;
+  --card-bg: #1e1e1e;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --border-color: #333;
+}
+
+.tablets-container {
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+  padding: 2rem;
+  border-radius: 8px;
+  min-height: 100vh;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0, 150, 136, 0.5);
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 0.5rem;
+}
+
+/* Búsqueda y filtros */
+.search-filter {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.search-input, .filter-select {
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #333;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  flex: 1;
+}
+
+.search-input:focus, .filter-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 150, 136, 0.25);
+}
+
+/* Cuadrícula de tablets */
+.tablets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Tarjeta de tablet */
+.tablet-card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+}
+
+.tablet-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.4);
+  border-color: var(--primary-color);
+}
+
+/* Imagen de la tablet */
+.tablet-image {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+  background-color: #252525;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.tablet-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.tablet-card:hover .tablet-image img {
+  transform: scale(1.05);
+}
+
+.discount-badge, .new-badge {
+  position: absolute;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.75rem;
+}
+
+.discount-badge {
+  top: 10px;
+  right: 10px;
+  background-color: #f44336;
+  color: white;
+}
+
+.new-badge {
+  top: 10px;
+  left: 10px;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Información de la tablet */
+.tablet-info {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.type-tag {
+  display: inline-block;
+  background-color: rgba(0, 150, 136, 0.1);
+  color: var(--primary-color);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  margin-bottom: 0.75rem;
+  align-self: flex-start;
+  border: 1px solid rgba(0, 150, 136, 0.3);
+}
+
+.tablet-info h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.tablet-brand {
+  font-size: 0.875rem;
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+/* Especificaciones */
+.specs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.specs span {
+  font-size: 0.875rem;
+  color: #bbb;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.specs i {
+  color: var(--primary-color);
+  width: 16px;
+  text-align: center;
+}
+
+.cellular {
+  color: var(--primary-color) !important;
+  font-weight: 600;
+}
+
+/* Precios */
+.price-section {
+  margin: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.original-price {
+  font-size: 0.875rem;
+  color: #999;
+  text-decoration: line-through;
+  margin: 0;
+}
+
+.current-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+/* Botón de añadir al carrito */
+.add-to-cart-btn {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.add-to-cart-btn:hover {
+  box-shadow: 0 0 10px rgba(0, 150, 136, 0.6);
+  filter: brightness(1.1);
+}
+
+/* Mensaje sin resultados */
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.no-results i {
+  font-size: 3rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-filter {
+    flex-direction: column;
+  }
+  
+  .tablets-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .tablets-container {
+    padding: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .tablets-grid {
+    grid-template-columns: 1fr;
+  }
+}
