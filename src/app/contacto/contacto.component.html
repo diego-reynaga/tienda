@@ -1,68 +1,300 @@
 <app-cabecero></app-cabecero>
-<!-- _______-----------------------------------____________________________________________ -->
-<!-- SECCIÓN 1 -->
-<section class="section-1">
+
+<!-- Hero Section -->
+<section class="hero-section">
   <div class="container">
-    <h1>Contacta con TechStore</h1>
-    <p>¿Tienes preguntas sobre nuestros productos, necesitas soporte técnico o quieres realizar una consulta? Estamos aquí para ayudarte.</p>
-    <button class="cta-button" (click)="scrollToForm()">Envíanos un mensaje</button>
+    <h1>Contacta con <span class="highlight">TechStore</span></h1>
+    <p class="subtitle">¿Tienes preguntas sobre nuestros productos, necesitas soporte técnico o quieres realizar una consulta? Estamos aquí para ayudarte.</p>
+    <button class="cta-button" (click)="scrollToForm()">
+      <i class="fas fa-paper-plane"></i> Envíanos un mensaje
+    </button>
   </div>
 </section>
 
-<!-- SECCIÓN 2 -->
-<section class="section-2" id="contactFormSection">
-  <div class="container">
-    <!-- Formulario -->
-    <div class="form-column">
-      <form (submit)="onSubmit()" #contactForm="ngForm">
-        <label for="firstName">Nombre</label>
-        <input type="text" id="firstName" name="firstName" ngModel required>
-
-        <label for="lastName">Apellido</label>
-        <input type="text" id="lastName" name="lastName" ngModel required>
-
-        <label for="email">Correo Electrónico</label>
-        <input type="email" id="email" name="email" ngModel required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-
-        <label for="message">Mensaje</label>
-        <textarea id="message" name="message" ngModel required minlength="10"></textarea>
-
-        <label>
-          <input type="checkbox" id="agree" name="agree" ngModel required>
-          Acepto los <a routerLink="/terminos-y-condiciones">Términos de servicio</a>
-        </label>
-
-        <button type="submit" class="submit-button" [disabled]="!contactForm.valid">Enviar Mensaje</button>
-
-        @if (formEnviado) {
-          <div class="u-text-success">¡Gracias! Tu mensaje ha sido enviado. Nos pondremos en contacto contigo pronto.</div>
-        }
-
-        @if (formError) {
-          <div class="u-text-danger">Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde.</div>
-        }
-      </form>
+<!-- Contact Info Section -->
+<section class="contact-info-section">
+  <div class="container info-container">
+    <div class="info-card">
+      <div class="icon-wrapper">
+        <i class="fas fa-map-marker-alt"></i>
+      </div>
+      <h3>Dirección</h3>
+      <p>Jirón Ayacucho 938, Andahuaylas<br>Apurímac, Perú</p>
     </div>
 
-    <!-- Mapa -->
-    <div class="map-column">
-      <iframe src="https://maps.google.com/maps?output=embed&q=Plaza%20de%20Andahuaylas%2C%20Apurimac%2C%20Peru&z=15&t=m"
-              allowfullscreen></iframe>
+    <div class="info-card">
+      <div class="icon-wrapper">
+        <i class="fas fa-phone-alt"></i>
+      </div>
+      <h3>Teléfono</h3>
+      <p>+51 999 999 999<br>+51 983 456 789</p>
+    </div>
+
+    <div class="info-card">
+      <div class="icon-wrapper">
+        <i class="fas fa-envelope"></i>
+      </div>
+      <h3>Email</h3>
+      <p>contactotechstore.com<br>soportetechstore.com</p>
+    </div>
+
+    <div class="info-card">
+      <div class="icon-wrapper">
+        <i class="fas fa-clock"></i>
+      </div>
+      <h3>Horario</h3>
+      <p>Lunes - Viernes: 9:00 - 18:00<br>Sábados: 10:00 - 14:00</p>
     </div>
   </div>
 </section>
 
-<!-- SECCIÓN 3 -->
-<!-- <section class="section-3">
+<!-- Form Section -->
+<section class="form-section" id="contactFormSection">
   <div class="container">
-    <div class="column">
-      <h2>Nuestra Información</h2>
-      <p>Encuentra respuestas rápidas o contáctanos directamente a través de los siguientes medios.</p>
+    <div class="section-header">
+      <h2>Envíanos un mensaje</h2>
+      <p>Completa el siguiente formulario y te responderemos a la brevedad</p>
     </div>
-    <div class="column">
-      <p><strong>TechStore S.A. de C.V.</strong><br>jirón Ayacucho 938, Andahuaylas<br>Atención principal online.</p>
-      <div class="highlight">Teléfono: +51 999 999 999<br>Email: contacto&#64;techstore.com</div>
+    
+    <!-- Formulario y Mapa -->
+    <div class="form-map-container">
+      <!-- Formulario -->
+      <div class="form-column">
+        <form (submit)="onSubmit()" #contactForm="ngForm" class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">Nombre <span class="required">*</span></label>
+              <div class="input-with-icon">
+                <i class="fas fa-user"></i>
+                <input 
+                  type="text" 
+                  id="firstName" 
+                  name="firstName" 
+                  ngModel 
+                  #firstName="ngModel"
+                  required
+                  [ngClass]="{'input-error': firstName.invalid && (firstName.dirty || firstName.touched)}"
+                >
+              </div>
+              @if (firstName.invalid && (firstName.dirty || firstName.touched)) {
+                <div class="error-message">Por favor ingresa tu nombre</div>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Apellido <span class="required">*</span></label>
+              <div class="input-with-icon">
+                <i class="fas fa-user"></i>
+                <input 
+                  type="text" 
+                  id="lastName" 
+                  name="lastName" 
+                  ngModel 
+                  #lastName="ngModel"
+                  required
+                  [ngClass]="{'input-error': lastName.invalid && (lastName.dirty || lastName.touched)}"
+                >
+              </div>
+              @if (lastName.invalid && (lastName.dirty || lastName.touched)) {
+                <div class="error-message">Por favor ingresa tu apellido</div>
+              }
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Correo Electrónico <span class="required">*</span></label>
+              <div class="input-with-icon">
+                <i class="fas fa-envelope"></i>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  ngModel 
+                  #email="ngModel"
+                  required 
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  [ngClass]="{'input-error': email.invalid && (email.dirty || email.touched)}"
+                >
+              </div>
+              @if (email.invalid && (email.dirty || email.touched)) {
+                <div class="error-message">
+                  @if (email.errors?.['required']) {
+                    Por favor ingresa tu correo electrónico
+                  } @else if (email.errors?.['pattern']) {
+                    Por favor ingresa un correo electrónico válido
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Teléfono</label>
+              <div class="input-with-icon">
+                <i class="fas fa-phone-alt"></i>
+                <input 
+                  type="tel" 
+                  id="phone" 
+                  name="phone" 
+                  ngModel
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Asunto <span class="required">*</span></label>
+            <div class="input-with-icon">
+              <i class="fas fa-tag"></i>
+              <input 
+                type="text" 
+                id="subject" 
+                name="subject" 
+                ngModel
+                #subject="ngModel" 
+                required
+                [ngClass]="{'input-error': subject.invalid && (subject.dirty || subject.touched)}"
+              >
+            </div>
+            @if (subject.invalid && (subject.dirty || subject.touched)) {
+              <div class="error-message">Por favor ingresa el asunto</div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="message">Mensaje <span class="required">*</span></label>
+            <div class="input-with-icon textarea-container">
+              <i class="fas fa-comment-alt"></i>
+              <textarea 
+                id="message" 
+                name="message" 
+                ngModel 
+                #message="ngModel"
+                required 
+                minlength="10"
+                [ngClass]="{'input-error': message.invalid && (message.dirty || message.touched)}"
+              ></textarea>
+            </div>
+            @if (message.invalid && (message.dirty || message.touched)) {
+              <div class="error-message">
+                @if (message.errors?.['required']) {
+                  Por favor ingresa tu mensaje
+                } @else if (message.errors?.['minlength']) {
+                  El mensaje debe tener al menos 10 caracteres
+                }
+              </div>
+            }
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-container">
+              <input 
+                type="checkbox" 
+                id="agree" 
+                name="agree" 
+                ngModel 
+                #agree="ngModel"
+                required
+              >
+              <span class="checkmark"></span>
+              Acepto los <a routerLink="/terminos-y-condiciones">Términos de servicio</a> y la <a routerLink="/politica-privacidad">Política de Privacidad</a>
+            </label>
+            @if (agree.invalid && (agree.dirty || agree.touched)) {
+              <div class="error-message">Debes aceptar los términos para continuar</div>
+            }
+          </div>
+
+          <button 
+            type="submit" 
+            class="submit-button" 
+            [disabled]="!contactForm.valid"
+            [ngClass]="{'button-disabled': !contactForm.valid}"
+          >
+            <i class="fas fa-paper-plane"></i> Enviar Mensaje
+          </button>
+
+          <!-- Mensajes de estado -->
+          <div class="form-status">
+            @if (formEnviado) {
+              <div class="success-message">
+                <i class="fas fa-check-circle"></i>
+                ¡Gracias! Tu mensaje ha sido enviado. Nos pondremos en contacto contigo pronto.
+              </div>
+            }
+
+            @if (formError) {
+              <div class="error-message form-error">
+                <i class="fas fa-exclamation-circle"></i>
+                Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde.
+              </div>
+            }
+          </div>
+        </form>
+      </div>
+
+      <!-- Mapa -->
+      <div class="map-column">
+        <div class="map-container">
+          <iframe src="https://maps.google.com/maps?output=embed&q=Plaza%20de%20Andahuaylas%2C%20Apurimac%2C%20Peru&z=15&t=m"
+                  allowfullscreen></iframe>
+        </div>
+        <div class="map-info">
+          <h3>Visita nuestra tienda principal</h3>
+          <p><i class="fas fa-map-marker-alt"></i> Jirón Ayacucho 938, Andahuaylas, Perú</p>
+          <p><i class="fas fa-directions"></i> <a href="https://goo.gl/maps/1234567890" target="_blank">Obtener indicaciones</a></p>
+        </div>
+      </div>
     </div>
   </div>
-</section> -->
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+  <div class="container">
+    <h2>Preguntas Frecuentes</h2>
+    
+    <div class="faq-container">
+      <div class="faq-item" (click)="toggleFaq($event)">
+        <div class="faq-question">
+          <h3>¿Cuál es el tiempo de respuesta a mi consulta?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Respondemos la mayoría de las consultas dentro de las 24-48 horas hábiles. Para asistencia urgente, te recomendamos llamar directamente a nuestro número de atención al cliente.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item" (click)="toggleFaq($event)">
+        <div class="faq-question">
+          <h3>¿Cómo puedo hacer seguimiento de mi pedido?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Puedes hacer seguimiento de tu pedido iniciando sesión en tu cuenta y visitando la sección "Mis pedidos". También recibirás actualizaciones por correo electrónico sobre el estado de tu pedido.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item" (click)="toggleFaq($event)">
+        <div class="faq-question">
+          <h3>¿Cuál es la política de devoluciones?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Aceptamos devoluciones dentro de los 14 días posteriores a la recepción del producto. Los artículos deben estar en su empaque original y en condiciones perfectas. Para iniciar una devolución, contacta con nuestro equipo de atención al cliente.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item" (click)="toggleFaq($event)">
+        <div class="faq-question">
+          <h3>¿Ofrecen servicio técnico para los productos?</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Sí, ofrecemos servicio técnico oficial para todos los productos que vendemos. Puedes solicitar asistencia técnica a través de este formulario de contacto o visitando nuestro centro de servicio técnico.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <app-footer-inicio></app-footer-inicio>

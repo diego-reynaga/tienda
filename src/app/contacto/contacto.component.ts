@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { FooterInicioComponent } from "../inicio/footer-inicio/footer-inicio.component";
 import { CabeceroComponent } from "../inicio/cabecero/cabecero.component";
@@ -9,31 +9,42 @@ import { CabeceroComponent } from "../inicio/cabecero/cabecero.component";
   selector: 'app-contacto',
   imports: [FormsModule, CommonModule, RouterModule, FooterInicioComponent, CabeceroComponent],
   templateUrl: './contacto.component.html',
-  styleUrl: './contacto.component.css',
+  styleUrls: ['./contacto.component.css'],
 })
 export class ContactoComponent {
+  @ViewChild('contactForm') contactForm!: NgForm;
+
   constructor(public router: Router) {}
 
-  formEnviado = false;
-  formError = false;
+  formEnviado: boolean = false;
+  formError: boolean = false;
 
-  onSubmit() {
-    try {
-      // Simulación de envío exitoso
-      this.formEnviado = true;
-      this.formError = false;
-
-      // Aquí iría lógica real, como una llamada HTTP
-    } catch (e) {
-      this.formError = true;
-      this.formEnviado = false;
+  scrollToForm() {
+    const element = document.getElementById('contactFormSection');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
-  scrollToForm(): void {
-    const element = document.getElementById('contactFormSection');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  onSubmit() {
+    if (this.contactForm.valid) {
+      // Aquí iría la lógica para enviar el formulario a un servidor
+      // Simulamos una respuesta exitosa después de un tiempo
+      setTimeout(() => {
+        this.formEnviado = true;
+        this.formError = false;
+        this.contactForm.resetForm();
+
+        // Reset del estado después de 5 segundos
+        setTimeout(() => {
+          this.formEnviado = false;
+        }, 5000);
+      }, 1500);
     }
+  }
+
+  toggleFaq(event: Event) {
+    const faqItem = (event.currentTarget as HTMLElement);
+    faqItem.classList.toggle('active');
   }
 }

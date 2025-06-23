@@ -121,8 +121,6 @@ export class LoginComponent {
       this.loginService.register(this.nombre, this.registroEmail, this.registroPassword)
         .then(result => {
           console.log('Registro exitoso:', result);
-          // Mostrar mensaje de éxito
-          alert('¡Registro exitoso! Ya puedes iniciar sesión.');
           // Cambiar al formulario de login
           this.showLoginForm();
         })
