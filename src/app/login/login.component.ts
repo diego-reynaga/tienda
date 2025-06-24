@@ -27,6 +27,9 @@ export class LoginComponent {
   // Variable para controlar la visibilidad de la contraseña
   mostrarPassword = false;
 
+  // Añadir esta propiedad para el toggle de vistas en móvil
+  mobileView: 'login' | 'register' = 'login';
+
 
 
   // Control del nombre en registro

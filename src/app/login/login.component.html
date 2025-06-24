@@ -1,5 +1,6 @@
 <div class="login">
-  <div class="container" [ngClass]="{ toggle: isClaseAgregada }">
+  <!-- Contenedor Desktop -->
+  <div class="container desktop-container" [ngClass]="{ toggle: isClaseAgregada }">
     <!-- FORMULARIO DE INICIO DE SESIÓN -->
     <div class="container-form">
       <form class="sign-in" (submit)="login()">
@@ -7,7 +8,7 @@
         <div class="redes-sociales text text-black">
           <i class="bi bi-facebook" (click)="loginWithFacebook()"></i>
           <i class="bi bi-google" (click)="loginWithGoogle()"></i>
-          <i class="bi bi-twitter-x"></i>
+          <i class="bi bi-twitter-x  text text-black"></i>
         </div>
         <span class="text text-black">Use su correo y contraseña</span>
 
@@ -65,7 +66,7 @@
         <div class="redes-sociales text text-black">
           <i class="bi bi-google" (click)="loginWithGoogle()"></i>
           <i class="bi bi-facebook" (click)="loginWithFacebook()"></i>
-          <i class="bi bi-twitter-x"></i>
+          <i class="bi bi-twitter-x  text text-black"></i>
         </div>
         <span class="text text-black"
           >Use su correo electrónico para registrarse</span
@@ -129,6 +130,115 @@
           Iniciar Sesión
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- Contenedor Mobile -->
+  <div class="mobile-container">
+    <div class="mobile-tabs">
+      <div class="tab" [class.active]="mobileView === 'login'" (click)="mobileView = 'login'">
+        Iniciar Sesión
+      </div>
+      <div class="tab" [class.active]="mobileView === 'register'" (click)="mobileView = 'register'">
+        Registrarse
+      </div>
+    </div>
+
+    <!-- Mobile Login Form -->
+    <div class="mobile-form" *ngIf="mobileView === 'login'">
+      <h2>Iniciar Sesión</h2>
+      <div class="social-icons">
+        <i class="bi bi-facebook" (click)="loginWithFacebook()"></i>
+        <i class="bi bi-google" (click)="loginWithGoogle()"></i>
+        <i class="bi bi-twitter-x"></i>
+      </div>
+      <p class="form-subtitle">Use su correo y contraseña</p>
+
+      <form (submit)="login()">
+        <div class="form-group">
+          <input
+            type="email"
+            placeholder="Email"
+            name="email"
+            [(ngModel)]="email"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <div class="password-input">
+            <input
+              [type]="mostrarPassword ? 'text' : 'password'"
+              placeholder="Password"
+              name="password"
+              [(ngModel)]="password"
+              autocomplete="off"
+              required
+            />
+            @if (password) {
+              <i
+                class="bi"
+                [ngClass]="mostrarPassword ? 'bi-eye-slash' : 'bi-eye'"
+                (click)="togglePasswordVisibility()"
+              ></i>
+            }
+          </div>
+        </div>
+
+        <a class="forgot-password">¿Olvidaste tu contraseña?</a>
+
+        <button class="mobile-button" type="submit">
+          <i class="bi bi-box-arrow-in-right"></i> INICIAR SESIÓN
+        </button>
+      </form>
+    </div>
+
+    <!-- Mobile Register Form -->
+    <div class="mobile-form" *ngIf="mobileView === 'register'">
+      <h2>Registrarse</h2>
+      <div class="social-icons">
+        <i class="bi bi-google" (click)="loginWithGoogle()"></i>
+        <i class="bi bi-facebook" (click)="loginWithFacebook()"></i>
+        <i class="bi bi-twitter-x"></i>
+      </div>
+      <p class="form-subtitle">Use su correo electrónico para registrarse</p>
+
+      <form (submit)="register()">
+        <div class="form-group">
+          <input
+            [(ngModel)]="textoCompleto"
+            [(ngModel)]="nombre"
+            name="nombre"
+            (input)="filtrarPrimeraPalabra($event)"
+            type="text"
+            placeholder="Nombre"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="email"
+            name="registroEmail"
+            [(ngModel)]="registroEmail"
+            placeholder="Email"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="password"
+            name="registroPassword"
+            [(ngModel)]="registroPassword"
+            placeholder="Password"
+            required
+          />
+        </div>
+
+        <button class="mobile-button" type="submit">REGISTRARSE</button>
+      </form>
     </div>
   </div>
 </div>
