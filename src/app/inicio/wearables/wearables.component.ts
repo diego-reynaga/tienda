@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CabeceroComponent } from '../cabecero/cabecero.component';
 import { FooterInicioComponent } from '../footer-inicio/footer-inicio.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CarritoService } from '../../services/carrito.service';
 
 interface Wearable {
   id: number;
@@ -122,6 +123,15 @@ export class WearablesComponent {
       compatibility: ['Android', 'iOS']
     }
   ];
+
+  // ------------------------------------------------------------------------------
+    constructor(private carritoService: CarritoService) {}
+    agregarAlCarrito(producto: any): void {
+      this.carritoService.agregarProducto(producto);
+      alert(`${producto.name} añadido al carrito`);
+    }
+    // ----------------------------------------------------
+  
 
   get deviceTypes(): string[] {
     return [...new Set(this.wearables.map(device => device.type))];

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CabeceroComponent } from '../cabecero/cabecero.component';
 import { FooterInicioComponent } from '../footer-inicio/footer-inicio.component';
+import { CarritoService } from '../../services/carrito.service';
 
 interface Tablet {
   id: number;
@@ -166,6 +167,17 @@ export class TabletsComponent {
       new: true
     }
   ];
+
+
+  // ------------------------------------------------------------------------------
+    constructor(private carritoService: CarritoService) {}
+    agregarAlCarrito(producto: any): void {
+      this.carritoService.agregarProducto(producto);
+      alert(`${producto.name} añadido al carrito`);
+    }
+    // ----------------------------------------------------
+  
+
 
   get brands(): string[] {
     return [...new Set(this.tablets.map(tablet => tablet.brand))];

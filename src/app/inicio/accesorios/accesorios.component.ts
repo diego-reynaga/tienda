@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CabeceroComponent } from "../cabecero/cabecero.component";
 import { FooterInicioComponent } from "../footer-inicio/footer-inicio.component";
+import { CarritoService } from '../../services/carrito.service';
 
 interface Accessory {
   id: number;
@@ -125,6 +126,13 @@ export class AccesoriosComponent {
       reviews: 368
     }
   ];
+// ------------------------------------------------------------------------------
+  constructor(private carritoService: CarritoService) {}
+  agregarAlCarrito(producto: any): void {
+    this.carritoService.agregarProducto(producto);
+    alert(`${producto.name} añadido al carrito`);
+  }
+  // ----------------------------------------------------
 
   searchTerm: string = '';
   selectedCategory: string = '';

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CabeceroComponent } from '../cabecero/cabecero.component';
 import { FooterInicioComponent } from '../footer-inicio/footer-inicio.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CarritoService } from '../../services/carrito.service';
 
 interface Drone {
   id: number;
@@ -137,6 +138,15 @@ export class DronesComponent {
       features: ['GPS', 'Return to Home', 'Motores sin escobillas']
     }
   ];
+
+  // ------------------------------------------------------------------------------
+  constructor(private carritoService: CarritoService) {}
+  agregarAlCarrito(producto: any): void {
+    this.carritoService.agregarProducto(producto);
+    alert(`${producto.name} añadido al carrito`);
+  }
+  // ----------------------------------------------------
+
 
   get categories(): string[] {
     return [...new Set(this.drones.map(drone => drone.category))];

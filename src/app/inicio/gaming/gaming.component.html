@@ -67,7 +67,7 @@
                 <span class="current-price">${{ product.price.toFixed(2) }}</span>
               }
             </div>
-            <button class="buy-now-btn">Comprar ahora</button>
+            <button class="buy-now-btn" (click)="agregarAlCarrito(product)">Comprar ahora</button>
           </div>
         </div>
       }
@@ -110,7 +110,7 @@
                   <span class="current-price">${{ product.price.toFixed(2) }}</span>
                 }
               </div>
-              <button class="add-to-cart-btn">
+              <button class="add-to-cart-btn" (click)="agregarAlCarrito(product)">
                 <i class="fas fa-shopping-cart"></i> Añadir al carrito
               </button>
             </div>

@@ -42,7 +42,7 @@
                 <span class="current-price">${{ accessory.price.toFixed(2) }}</span>
               }
             </div>
-            <button class="add-to-cart-btn">
+            <button class="add-to-cart-btn" (click)="agregarAlCarrito(accessory)">
               <i class="fas fa-shopping-cart"></i>
               Añadir al carrito
             </button>

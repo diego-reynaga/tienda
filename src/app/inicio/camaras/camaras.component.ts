@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CabeceroComponent } from '../cabecero/cabecero.component';
 import { FooterInicioComponent } from '../footer-inicio/footer-inicio.component';
+import { CarritoService } from '../../services/carrito.service';
 
 interface Camera {
   id: number;
@@ -189,6 +190,15 @@ export class CamarasComponent {
       feature: 'FlowState Stabilization'
     }
   ];
+
+  // ------------------------------------------------------------------------------
+  constructor(private carritoService: CarritoService) {}
+  agregarAlCarrito(producto: any): void {
+    this.carritoService.agregarProducto(producto);
+    alert(`${producto.name} añadido al carrito`);
+  }
+  // ----------------------------------------------------
+
 
   get cameraTypes(): string[] {
     return [...new Set(this.cameras.map(camera => camera.type))];

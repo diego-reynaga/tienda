@@ -19,7 +19,8 @@
         </p>
         <div class="price-tag">$299.99</div>
         <div class="mt-4">
-          <button type="button" class="btn-comprar">
+          <!-- no cuenta con una interfaz -->
+          <button type="button" class="btn-comprar" (click)="agregarAlCarrito(filteredProducts)">
             <i class="fas fa-shopping-cart"></i> Comprar
           </button>
         </div>
@@ -70,7 +71,7 @@
                   <span class="current-price">${{ product.price.toFixed(2) }}</span>
                 }
               </div>
-              <button class="add-to-cart-btn">
+              <button class="add-to-cart-btn" (click)="agregarAlCarrito(product)">
                 <i class="fas fa-shopping-cart"></i> Añadir al carrito
               </button>
             </div>

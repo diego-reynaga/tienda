@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CabeceroComponent } from '../cabecero/cabecero.component';
 import { FooterInicioComponent } from '../footer-inicio/footer-inicio.component';
+import { CarritoService } from '../../services/carrito.service';
 
 interface Product {
   id: number;
@@ -122,6 +123,16 @@ export class AudioVideoComponent {
       reviews: 1876
     }
   ];
+
+
+  // ------------------------------------------------------------------------------
+    constructor(private carritoService: CarritoService) {}
+    agregarAlCarrito(producto: any): void {
+      this.carritoService.agregarProducto(producto);
+      alert(`${producto.name} añadido al carrito`);
+    }
+    // ----------------------------------------------------
+  
 
   get categories(): string[] {
     return [...new Set(this.products.map(product => product.category))];

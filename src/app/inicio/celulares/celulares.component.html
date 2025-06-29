@@ -15,7 +15,7 @@
           <h1 class="display-4 fw-bold mb-2">{{ celular.modeloCompleto }}</h1>
           <p class="lead mb-4">{{ celular.descripcionCorta }}</p>
           <div class="d-flex gap-3">
-            <button class="btn btn-primary btn-lg px-4 py-2 rounded-pill animate-pulse">
+            <button class="btn btn-primary btn-lg px-4 py-2 rounded-pill animate-pulse" (click)="agregarAlCarrito(celular)">
               <i class="bi bi-bag-fill me-2"></i>Comprar ahora
             </button>
             <button class="btn btn-outline-light btn-lg px-4 py-2 rounded-pill" (click)="openModal(celular.id)">

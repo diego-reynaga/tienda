@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { LoginService } from '../../servicios/login.service';
+import { CarritoService } from '../../services/carrito.service';
 
 @Component({
   selector: 'app-cabecero',
@@ -11,10 +12,12 @@ import { LoginService } from '../../servicios/login.service';
 export class CabeceroComponent {
   constructor(
     public router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private carritoService: CarritoService
   ) {}
   isLoggedIn: boolean = false;
   loggedInUser: string | null = null;  //alamacena el email del usuario logueado
+  contadorCarrito: number = 0;
 
   ngOnInit() {
     this.loginService.getAuthState().subscribe((usuario) => {
@@ -25,6 +28,9 @@ export class CabeceroComponent {
         this.isLoggedIn = false;
         this.loggedInUser = null;//borrar si hayerror
       }
+    });
+    this.carritoService.contador$.subscribe((contador) => {
+      this.contadorCarrito = contador; // Actualiza el contador en tiempo real
     });
   }
 

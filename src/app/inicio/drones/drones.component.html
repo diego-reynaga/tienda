@@ -52,7 +52,7 @@
           <span class="current-price">$1,999.99</span>
         </div>
         <div class="featured-actions">
-          <button class="buy-now-btn">Comprar ahora</button>
+          <button class="buy-now-btn" (click)="agregarAlCarrito(categories)">Comprar ahora</button>
         </div>
       </div>
     </div>
@@ -99,7 +99,7 @@
                   <span class="current-price">${{ drone.price.toFixed(2) }}</span>
                 }
               </div>
-              <button class="add-cart-btn">
+              <button class="add-cart-btn" (click)="agregarAlCarrito(drone)">
                 <i class="fas fa-shopping-cart"></i> Añadir al carrito
               </button>
             </div>

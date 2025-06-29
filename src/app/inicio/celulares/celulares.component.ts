@@ -5,6 +5,7 @@ import { CELULARES_DATOS, CELULARES_DETALLES } from './celulares-datos';
 import { CabeceroComponent } from '../cabecero/cabecero.component';
 import { FooterInicioComponent } from '../footer-inicio/footer-inicio.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CarritoService } from '../../services/carrito.service';
 
 
 @Component({
@@ -32,6 +33,15 @@ export class CelularesComponent {
 
   private modalActivo = signal('');
   private detallesActivos = signal('');
+
+
+  // ------------------------------------------------------------------------------
+    constructor(private carritoService: CarritoService) {}
+    agregarAlCarrito(producto: any): void {
+      this.carritoService.agregarProducto(producto);
+      alert(`${producto.modeloCompleto} añadido al carrito`);
+    }
+    // ----------------------------------------------------
 
   activeModal() {
     return this.modalActivo();
