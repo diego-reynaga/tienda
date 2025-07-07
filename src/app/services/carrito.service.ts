@@ -53,4 +53,9 @@ export class CarritoService {
     const totalProductos = this.productos.reduce((total, producto) => total + producto.cantidad, 0);
     this.contador.next(totalProductos); // Emite el nuevo valor del contador
   }
+
+  obtenerTotal(): number {
+  return this.productos.reduce((total, producto) => 
+    total + (producto.price * producto.cantidad), 0);
+}
 }

@@ -15,6 +15,8 @@ import { GamingComponent } from './inicio/gaming/gaming.component';
 import { TabletsComponent } from './inicio/tablets/tablets.component';
 import { CamarasComponent } from './inicio/camaras/camaras.component';
 import { CarritoComponent } from './compras/carrito/carrito.component';
+import { PasarelaPagosComponent } from './compras/pasarela-pagos/pasarela-pagos.component';
+import { AprobarVentasComponent } from './compras/personal/personal.component'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -33,5 +35,7 @@ export const routes: Routes = [
   { path: 'tablets', component: TabletsComponent},
   { path: 'camaras', component: CamarasComponent},
   { path: 'carrito', component: CarritoComponent},
+  { path: 'pasarela-pagos', component: PasarelaPagosComponent},
+  { path: 'personal', component: AprobarVentasComponent},
   { path: '**', component: NotFoundComponent }, //Este es la ruta comodín, que se ejecuta cuando no se encuentra la ruta solicitada
 ];
