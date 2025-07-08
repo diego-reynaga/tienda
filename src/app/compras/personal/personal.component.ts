@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { PagosService } from '../../services/pagos.service';
 import { CabeceroComponent } from "../../inicio/cabecero/cabecero.component";
 import { FooterInicioComponent } from "../../inicio/footer-inicio/footer-inicio.component";
+import { FirebaseService } from '../../services/firebase.service';
 
 interface Cliente {
   dni: string;
@@ -48,23 +49,19 @@ export class AprobarVentasComponent implements OnInit {
   filtro = '';
   filtroEstado = 'all';
 
-  constructor(private pagosService: PagosService) { }
+  constructor(
+    private pagosService: PagosService,
+    private firebaseService: FirebaseService
+  ) { }
 
   ngOnInit(): void {
-    this.cargarVentas();
+    this.firebaseService.escucharCompras().subscribe((compras) => {
+    this.ventas = compras;
+    this.aplicarFiltros(); // Aplicar filtros si es necesario
+  });
   }
 
-  cargarVentas(): void {
-    this.pagosService.obtenerVentas().subscribe({
-      next: (data) => {
-        this.ventas = data;
-        this.aplicarFiltros();
-      },
-      error: (err) => {
-        console.error('Error al cargar las ventas', err);
-      }
-    });
-  }
+ 
 
   aplicarFiltros(): void {
     let resultado = [...this.ventas];
@@ -86,9 +83,7 @@ export class AprobarVentasComponent implements OnInit {
     this.ventasFiltradas = resultado;
   }
 
-  refrescarVentas(): void {
-    this.cargarVentas();
-  }
+ 
 
   verDetalles(venta: Venta): void {
     this.ventaSeleccionada = venta;
@@ -100,31 +95,23 @@ export class AprobarVentasComponent implements OnInit {
     this.ventaSeleccionada = null;
   }
 
-  aprobarVenta(): void {
-    if (this.ventaSeleccionada) {
-      this.pagosService.aprobarVenta(this.ventaSeleccionada.id).subscribe({
-        next: () => {
-          this.ventaSeleccionada!.estado = 'approved';
-          this.cargarVentas();
-        },
-        error: (err) => {
-          console.error('Error al aprobar la venta', err);
-        }
-      });
-    }
-  }
+ 
 
-  rechazarVenta(): void {
-    if (this.ventaSeleccionada) {
-      this.pagosService.rechazarVenta(this.ventaSeleccionada.id).subscribe({
-        next: () => {
-          this.ventaSeleccionada!.estado = 'rejected';
-          this.cargarVentas();
-        },
-        error: (err) => {
-          console.error('Error al rechazar la venta', err);
-        }
-      });
-    }
+ aprobarCompra(): void {
+  if (this.ventaSeleccionada) {
+    this.firebaseService.actualizarEstadoCompra(this.ventaSeleccionada.id.toString(), 'approved').then(() => {
+      alert('La compra ha sido aprobada exitosamente.');
+      this.cerrarModal();
+    });
   }
+}
+
+rechazarCompra(): void {
+  if (this.ventaSeleccionada) {
+    this.firebaseService.actualizarEstadoCompra(this.ventaSeleccionada.id.toString(), 'rejected').then(() => {
+      alert('La compra ha sido rechazada.');
+      this.cerrarModal();
+    });
+  }
+}
 }

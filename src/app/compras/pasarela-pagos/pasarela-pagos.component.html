@@ -320,6 +320,7 @@
                         <button 
                           type="button" 
                           class="btn btn-primary btn-lg px-4" 
+                          [disabled]="!dniVerificado || datosForm.invalid || !comprobanteSeleccionado" 
                           (click)="enviarPago()"
                         >
                           <i class="bi bi-check2-circle me-2"></i>Finalizar compra
@@ -334,62 +335,63 @@
         }
 
         <!-- Paso 3: Estado de la compra -->
+        
         @if (currentStep === 3) {
-          <div class="card payment-card border-0 shadow-lg animate__animated animate__fadeIn">
-            <div class="card-header bg-gradient py-3">
-              <h3 class="mb-0"><i class="bi bi-bell-fill me-2"></i>Estado de la compra</h3>
-            </div>
-            <div class="card-body p-4 text-center">
-              @if (estadoCompra === 'pendiente') {
-                <div class="my-5 py-4">
-                  <div class="spinner-container mb-4">
-                    <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;" role="status">
-                      <span class="visually-hidden">Cargando...</span>
-                    </div>
-                  </div>
-                  <h3 class="mb-3">Tu compra está siendo procesada</h3>
-                  <p class="text-muted mb-0">Estamos verificando tu pago. Este proceso puede tardar unos minutos.</p>
-                  <div class="progress mt-4" style="height: 6px;">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 75%"></div>
-                  </div>
-                </div>
-              } @else if (estadoCompra === 'aprobada') {
-                <div class="my-5 py-4 animate__animated animate__fadeIn">
-                  <div class="success-checkmark mb-4">
-                    <div class="check-icon">
-                      <i class="bi bi-check-circle-fill text-success" style="font-size: 5rem;"></i>
-                    </div>
-                  </div>
-                  <h3 class="mb-3">¡Compra aprobada!</h3>
-                  <p class="mb-4">Tu pedido ha sido confirmado y está en proceso.</p>
-                  <div class="order-number-container p-3 rounded mb-4">
-                    <p class="mb-1 text-muted small">Número de pedido</p>
-                    <h4 class="mb-0 text-gradient">{{ numeroPedido }}</h4>
-                  </div>
-                  <button class="btn btn-primary btn-lg mt-3 px-4" (click)="volverInicio()">
-                    <i class="bi bi-house-door-fill me-2"></i>Volver al inicio
-                  </button>
-                </div>
-              } @else if (estadoCompra === 'rechazada') {
-                <div class="my-5 py-4 animate__animated animate__fadeIn">
-                  <div class="text-danger mb-4">
-                    <i class="bi bi-x-circle-fill" style="font-size: 5rem;"></i>
-                  </div>
-                  <h3 class="mb-3">Compra rechazada</h3>
-                  <p class="mb-4">Lo sentimos, no se pudo procesar tu pago. Por favor intenta nuevamente.</p>
-                  <div class="d-flex justify-content-center">
-                    <button class="btn btn-outline-light btn-lg me-3 px-4" (click)="volverPaso()">
-                      <i class="bi bi-arrow-repeat me-2"></i>Volver a intentar
-                    </button>
-                    <button class="btn btn-primary btn-lg px-4" (click)="volverInicio()">
-                      <i class="bi bi-house-door-fill me-2"></i>Volver al inicio
-                    </button>
-                  </div>
-                </div>
-              }
+  <div class="card payment-card border-0 shadow-lg animate__animated animate__fadeIn">
+    <div class="card-header bg-gradient py-3">
+      <h3 class="mb-0"><i class="bi bi-bell-fill me-2"></i>Estado de la compra</h3>
+    </div>
+    <div class="card-body p-4 text-center">
+      @if (estadoCompra === 'pendiente') {
+        <div class="my-5 py-4">
+          <div class="spinner-container mb-4">
+            <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;" role="status">
+              <span class="visually-hidden">Cargando...</span>
             </div>
           </div>
-        }
+          <h3 class="mb-3">Tu compra está siendo procesada</h3>
+          <p class="text-muted mb-0">Estamos verificando tu pago. Este proceso puede tardar unos minutos.</p>
+          <div class="progress mt-4" style="height: 6px;">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 75%"></div>
+          </div>
+        </div>
+      } @else if (estadoCompra === 'aprobada') {
+        <div class="my-5 py-4 animate__animated animate__fadeIn">
+          <div class="success-checkmark mb-4">
+            <div class="check-icon">
+              <i class="bi bi-check-circle-fill text-success" style="font-size: 5rem;"></i>
+            </div>
+          </div>
+          <h3 class="mb-3">¡Compra aprobada!</h3>
+          <p class="mb-4">Tu pedido ha sido confirmado y está en proceso.</p>
+          <div class="order-number-container p-3 rounded mb-4">
+            <p class="mb-1 text-muted small">Número de pedido</p>
+            <h4 class="mb-0 text-gradient">{{ numeroPedido }}</h4>
+          </div>
+          <button class="btn btn-primary btn-lg mt-3 px-4" (click)="volverInicio()">
+            <i class="bi bi-house-door-fill me-2"></i>Volver al inicio
+          </button>
+        </div>
+      } @else if (estadoCompra === 'rechazada') {
+        <div class="my-5 py-4 animate__animated animate__fadeIn">
+          <div class="text-danger mb-4">
+            <i class="bi bi-x-circle-fill" style="font-size: 5rem;"></i>
+          </div>
+          <h3 class="mb-3">Compra rechazada</h3>
+          <p class="mb-4">Lo sentimos, no se pudo procesar tu pago. Por favor intenta nuevamente.</p>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-outline-light btn-lg me-3 px-4" (click)="volverPaso()">
+              <i class="bi bi-arrow-repeat me-2"></i>Volver a intentar
+            </button>
+            <button class="btn btn-primary btn-lg px-4" (click)="volverInicio()">
+              <i class="bi bi-house-door-fill me-2"></i>Volver al inicio
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+}
       </div>
     </div>
   </div>

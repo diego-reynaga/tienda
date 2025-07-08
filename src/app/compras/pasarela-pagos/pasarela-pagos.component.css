@@ -225,3 +225,14 @@
     font-size: 0.9rem;
   }
 }
+.text-success {
+  color: green;
+}
+
+.text-danger {
+  color: red;
+}
+
+.text-warning {
+  color: orange;
+}
