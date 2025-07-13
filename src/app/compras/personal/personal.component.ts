@@ -55,11 +55,17 @@ export class AprobarVentasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.firebaseService.escucharCompras().subscribe((compras) => {
-    this.ventas = compras;
-    this.aplicarFiltros(); // Aplicar filtros si es necesario
+  this.firebaseService.escucharCompras().subscribe({
+    next: (compras) => {
+      this.ventas = compras;
+      this.aplicarFiltros();
+    },
+    error: (err) => {
+      console.error('Error al conectar con Firestore:', err);
+      this.ventas = []; // Usa datos vacíos o estáticos
+    },
   });
-  }
+}
 
  
 

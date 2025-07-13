@@ -11,39 +11,42 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/frontend",
             "index": "src/index.html",
-            "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              "src/favicon.ico",
+              "src/assets",
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/"
+              },
+              {
+                "glob": ".nojekyll",
+                "input": ".",
+                "output": "/"
               }
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+              "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/@popperjs/core/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "baseHref": "/tienda/",
               "budgets": [
                 {
                   "type": "initial",
@@ -52,11 +55,10 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "8kB",
+                  "maximumWarning": "10kB",
                   "maximumError": "12kB"
                 }
-              ],
-              "outputHashing": "all"
+              ]
             },
             "development": {
               "optimization": false,
@@ -107,29 +109,14 @@
             "scripts": []
           }
         },
-        "prerender": {
-          "builder": "@angular-devkit/build-angular:prerender",
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "browserTarget": "frontend:build:production",
-            "serverTarget": "frontend:server:production",
-            "routes": [
-              "/"
-            ]
-          }
-        },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/frontend-server",
-            "main": "src/main.server.ts",
-            "tsConfig": "tsconfig.server.json"
-          },
-          "configurations": {
-            "production": {
-              "outputHashing": "media",
-              "sourceMap": false,
-              "optimization": true
-            }
+            "baseHref": "https://diego-reynaga.github.io/tienda/",
+            "name": "Diego Reynaga",
+            "email": "diego.reynaga@example.com",
+            "noSilent": true,
+            "dir": "dist/frontend"
           }
         }
       }
