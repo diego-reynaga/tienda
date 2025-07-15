@@ -1,0 +1,29 @@
+[debug] [2025-07-15T00:49:30.678Z] ----------------------------------------------------------------------
+[debug] [2025-07-15T00:49:30.685Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\THINKPAD\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-07-15T00:49:30.686Z] CLI Version:   14.8.0
+[debug] [2025-07-15T00:49:30.686Z] Platform:      win32
+[debug] [2025-07-15T00:49:30.687Z] Node Version:  v22.13.1
+[debug] [2025-07-15T00:49:30.688Z] Time:          Mon Jul 14 2025 19:49:30 GMT-0500 (hora estándar de Colombia)
+[debug] [2025-07-15T00:49:30.688Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-15T00:49:30.707Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-07-15T00:49:32.633Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-15T00:49:32.634Z] > authorizing via signed-in user (abollanedapedraza@gmail.com)
+[debug] [2025-07-15T00:49:32.635Z] [iam] checking project techstore-c9c56 for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-15T00:49:32.637Z] Checked if tokens are valid: true, expires at: 1752542371742
+[debug] [2025-07-15T00:49:32.637Z] Checked if tokens are valid: true, expires at: 1752542371742
+[debug] [2025-07-15T00:49:32.638Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/techstore-c9c56:testIamPermissions [none]
+[debug] [2025-07-15T00:49:32.638Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/techstore-c9c56:testIamPermissions x-goog-quota-user=projects/techstore-c9c56
+[debug] [2025-07-15T00:49:32.638Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/techstore-c9c56:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-15T00:49:43.067Z] *** [apiv2] error from fetch(https://firebase-public.firebaseio.com/cli.json, {"headers":{},"method":"GET"}): FetchError: request to https://firebase-public.firebaseio.com/cli.json failed, reason: getaddrinfo ENOTFOUND firebase-public.firebaseio.com
+[warn] !  Unable to fetch the CLI MOTD and remote config. This is not a fatal error, but may indicate an issue with your network connection. 
+[debug] [2025-07-15T00:49:43.069Z] Failed to fetch MOTD FirebaseError: Failed to make request to https://firebase-public.firebaseio.com/cli.json
+[debug] [2025-07-15T00:49:44.674Z] *** [apiv2] error from fetch(https://cloudresourcemanager.googleapis.com/v1/projects/techstore-c9c56:testIamPermissions, {"headers":{},"method":"POST","body":"{\"permissions\":[\"datastore.indexes.create\",\"datastore.indexes.delete\",\"datastore.indexes.list\",\"datastore.indexes.update\",\"firebase.projects.get\",\"firebasehosting.sites.update\"]}"}): FetchError: request to https://cloudresourcemanager.googleapis.com/v1/projects/techstore-c9c56:testIamPermissions failed, reason: getaddrinfo ENOTFOUND cloudresourcemanager.googleapis.com
+[debug] [2025-07-15T00:49:44.675Z] [iam] error while checking permissions, command may fail: Failed to make request to https://cloudresourcemanager.googleapis.com/v1/projects/techstore-c9c56:testIamPermissions
+[debug] [2025-07-15T00:49:44.676Z] Checked if tokens are valid: true, expires at: 1752542371742
+[debug] [2025-07-15T00:49:44.677Z] Checked if tokens are valid: true, expires at: 1752542371742
+[debug] [2025-07-15T00:49:44.677Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/techstore-c9c56 [none]
+[debug] [2025-07-15T00:49:44.685Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects/techstore-c9c56, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects/techstore-c9c56 failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
+[debug] [2025-07-15T00:49:44.685Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/techstore-c9c56 (original: request to https://firebase.googleapis.com/v1beta1/projects/techstore-c9c56 failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com)
+[error] 
+[error] Error: Assertion failed: resolving hosting target of a site with no site name or target name. This should have caused an error earlier

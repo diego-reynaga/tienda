@@ -12,7 +12,10 @@ import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZoneChangeDetection({ 
+      eventCoalescing: true,
+      runCoalescing: true 
+    }),
     provideRouter(routes, withHashLocation()),
     provideClientHydration(withEventReplay()),
     provideHttpClient(),
