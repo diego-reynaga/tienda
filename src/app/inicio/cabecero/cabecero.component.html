@@ -25,12 +25,16 @@
           <a class="nav-link" [routerLink]="'/inicio'">Inicio</a>
         </li>
         }
-        <!-- <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Productos</a>
-        </li> -->
+        @if (loggedInUser == 'diego@gmail.com') { 
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" [routerLink]="'/personal'">personal</a>
+        </li>
+      }
+      @if (isLoggedIn == true) { 
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/pedidos'">pedidos</a>
+        </li>
+      }
         <!-- <li class="nav-item">
           <a class="nav-link" href="#">Ofertas</a>
         </li> -->
