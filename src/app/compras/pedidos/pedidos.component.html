@@ -1,0 +1,203 @@
+<app-cabecero/>
+<div class="pedidos-container">
+  <div class="header">
+    <h1>Mis Pedidos y Mensajes</h1>
+    <p>Aquí puedes ver el historial de tus pedidos y chatear con nuestro equipo de atención al cliente</p>
+  </div>
+
+  <div class="content-wrapper">
+    <!-- Sección de Pedidos -->
+    <div class="pedidos-section">
+      <h2><i class="fas fa-shopping-bag"></i> Mis Pedidos</h2>
+      
+      @if (pedidos.length === 0) {
+        <div class="empty-state">
+          <i class="fas fa-shopping-cart"></i>
+          <h3>No tienes pedidos aún</h3>
+          <p>Explora nuestros productos y haz tu primer pedido</p>
+        </div>
+      } @else {
+        <div class="pedidos-grid">
+          @for (pedido of pedidos; track pedido.id) {
+            <div class="pedido-card">
+              <div class="pedido-header">
+                <div class="pedido-info">
+                  <h3>Pedido #{{ pedido.id?.substring(0, 8) }}</h3>
+                  <span class="fecha">{{ formatearFecha(pedido.fecha || pedido.fechaCompra) }}</span>
+                </div>
+                <div class="pedido-actions">
+                  <div class="estado-badge" [style.color]="obtenerColorEstado(pedido.estado)">
+                    {{ obtenerEstadoPedido(pedido.estado) }}
+                  </div>
+                  <button class="toggle-btn" (click)="togglePedidoExpandido(pedido.id)">
+                    <i class="fas" [class.fa-chevron-down]="!esPedidoExpandido(pedido.id)" [class.fa-chevron-up]="esPedidoExpandido(pedido.id)"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Resumen de productos (siempre visible) -->
+              @if (!esPedidoExpandido(pedido.id)) {
+                <div class="pedido-resumen">
+                  <div class="resumen-productos">
+                    <span class="productos-count">{{ pedido.productos.length }} producto(s)</span>
+                    <span class="productos-texto">{{ obtenerResumenProductos(pedido.productos) }}</span>
+                  </div>
+                  <div class="total-resumen">
+                    <strong>Total: S/ {{ (pedido.total || calcularTotalPedido(pedido.productos)) | number:'1.2-2' }}</strong>
+                  </div>
+                </div>
+              }
+              
+              <!-- Detalles completos (expandible) -->
+              @if (esPedidoExpandido(pedido.id)) {
+                <div class="pedido-productos">
+                  @for (producto of pedido.productos; track producto.id) {
+                    <div class="producto-item">
+                      <img [src]="producto.imageUrl || producto.imagen" [alt]="producto.name || producto.nombre" class="producto-imagen">
+                      <div class="producto-info">
+                        <h4>{{ producto.name || producto.nombre }}</h4>
+                        <p>Cantidad: {{ producto.cantidad }}</p>
+                        <p class="precio">S/ {{ (producto.price || producto.precio) | number:'1.2-2' }}</p>
+                      </div>
+                    </div>
+                  }
+                </div>
+                
+                <div class="pedido-footer">
+                  <div class="total">
+                    <strong>Total: S/ {{ (pedido.total || calcularTotalPedido(pedido.productos)) | number:'1.2-2' }}</strong>
+                  </div>
+                  <div class="direccion">
+                    <i class="fas fa-map-marker-alt"></i>
+                    {{ pedido.direccion }}
+                  </div>
+                  @if (pedido.telefono) {
+                    <div class="telefono">
+                      <i class="fas fa-phone"></i>
+                      {{ pedido.telefono }}
+                    </div>
+                  }
+                  @if (pedido.metodoPago) {
+                    <div class="metodo-pago">
+                      <i class="fas fa-credit-card"></i>
+                      {{ pedido.metodoPago }}
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Sección de Chat -->
+    <div class="chat-section">
+      <div class="chat-header">
+        <h2><i class="fas fa-comments"></i> Mensajes de Contacto</h2>
+      </div>
+      
+      <div class="chat-layout">
+        <!-- Lista de conversaciones -->
+        <div class="conversaciones-lista">
+          @if (contactos.length === 0) {
+            <div class="empty-conversations">
+              <i class="fas fa-envelope"></i>
+              <p>No tienes mensajes de contacto</p>
+            </div>
+          } @else {
+            @for (contacto of contactos; track contacto.id) {
+              <div class="conversacion-item" 
+                   [class.activa]="contactoSeleccionado?.id === contacto.id"
+                   [class.nueva]="tieneNuevosMensajes(contacto.id)"
+                   (click)="seleccionarContacto(contacto)">
+                <div class="conversacion-header">
+                  <h4>{{ obtenerAsuntoContacto(contacto) }}</h4>
+                  <span class="fecha">{{ formatearFecha(obtenerFechaContacto(contacto)) }}</span>
+                </div>
+                <div class="conversacion-preview">
+                  <p>{{ obtenerUltimoMensaje(contacto.id) }}</p>
+                  @if (tieneNuevosMensajes(contacto.id)) {
+                    <span class="nuevo-badge">Nuevo</span>
+                  }
+                </div>
+              </div>
+            }
+          }
+        </div>
+
+        <!-- Chat activo -->
+        <div class="chat-activo">
+          @if (!contactoSeleccionado) {
+            <div class="chat-placeholder">
+              <i class="fas fa-comments"></i>
+              <h3>Selecciona una conversación</h3>
+              <p>Elige un mensaje de contacto para empezar a chatear</p>
+            </div>
+          } @else {
+            <div class="chat-header-activo">
+              <h3>{{ obtenerAsuntoContacto(contactoSeleccionado) }}</h3>
+              <div class="contacto-info">
+                <span>{{ obtenerNombreContacto(contactoSeleccionado) }}</span>
+                <span class="estado-chat">{{ obtenerEstadoContacto(contactoSeleccionado) }}</span>
+              </div>
+            </div>
+
+            <!-- Mensaje original -->
+            <div class="mensaje-original">
+              <div class="mensaje-header">
+                <strong>Mensaje Original:</strong>
+                <span class="fecha">{{ formatearFecha(obtenerFechaContacto(contactoSeleccionado)) }}</span>
+              </div>
+              <p>{{ obtenerMensajeContacto(contactoSeleccionado) }}</p>
+              <div class="contacto-datos">
+                <span><i class="fas fa-envelope"></i> {{ obtenerEmailContacto(contactoSeleccionado) }}</span>
+                @if (obtenerTelefonoContacto(contactoSeleccionado)) {
+                  <span><i class="fas fa-phone"></i> {{ obtenerTelefonoContacto(contactoSeleccionado) }}</span>
+                }
+              </div>
+            </div>
+
+            <!-- Mensajes del chat -->
+            <div class="chat-mensajes" #chatContainer>
+              @if (mensajesChat[contactoSeleccionado.id]) {
+                @for (mensaje of mensajesChat[contactoSeleccionado.id]; track mensaje.id) {
+                  <div class="mensaje" [class.cliente]="mensaje.remitente === 'cliente'" [class.personal]="mensaje.remitente === 'personal'">
+                    <div class="mensaje-contenido">
+                      <div class="mensaje-header">
+                        <strong>{{ mensaje.nombreRemitente }}</strong>
+                        <span class="fecha">{{ formatearFecha(mensaje.fechaEnvio) }}</span>
+                      </div>
+                      <p>{{ mensaje.mensaje }}</p>
+                      @if (mensaje.remitente === 'cliente') {
+                        <div class="mensaje-estado">
+                          <i class="fas fa-check" [class.leido]="mensaje.leido"></i>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                }
+              }
+            </div>
+
+            <!-- Input para nuevo mensaje -->
+            <div class="chat-input">
+              <div class="input-container">
+                <input 
+                  type="text" 
+                  [(ngModel)]="nuevoMensaje" 
+                  placeholder="Escribe tu mensaje..."
+                  (keyup.enter)="enviarMensaje()"
+                  class="mensaje-input"
+                >
+                <button (click)="enviarMensaje()" [disabled]="!nuevoMensaje.trim()" class="enviar-btn">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

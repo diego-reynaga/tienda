@@ -14,14 +14,15 @@
                   type="text" 
                   class="form-control bg-dark text-light border-dark" 
                   placeholder="Buscar por DNI o nombre"
-                  [(ngModel)]="filtro">
-                <button class="btn btn-primary" type="button">
+                  [(ngModel)]="filtro"
+                  (input)="aplicarFiltros()">
+                <button class="btn btn-primary" type="button" (click)="aplicarFiltros()">
                   <i class="bi bi-search"></i>
                 </button>
               </div>
             </div>
             <div class="col-md-3 mb-3 mb-md-0">
-              <select class="form-select bg-dark text-light border-dark" [(ngModel)]="filtroEstado">
+              <select class="form-select bg-dark text-light border-dark" [(ngModel)]="filtroEstado" (change)="aplicarFiltros()">
                 <option value="all">Todos los estados</option>
                 <option value="pending">Pendientes</option>
                 <option value="approved">Aprobados</option>
@@ -29,18 +30,36 @@
               </select>
             </div>
             <div class="col-md-3">
-              <button class="btn btn-outline-light w-100">
+              <button class="btn btn-outline-light w-100" (click)="actualizarDatos()">
                 <i class="bi bi-arrow-clockwise me-1"></i> Actualizar
               </button>
             </div>
           </div>
         </div>
       </div>
-      
-      <!-- Lista de ventas -->
-      @if (ventas.length > 0) {
-        <div class="card bg-secondary border-0 shadow-lg">
-          <div class="table-responsive">
+
+      <!-- Pestañas -->
+      <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="ventas-tab" data-bs-toggle="tab" data-bs-target="#ventas" type="button" role="tab" aria-controls="ventas" aria-selected="true">
+            <i class="bi bi-cart-check me-2"></i>Ventas
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="contactos-tab" data-bs-toggle="tab" data-bs-target="#contactos" type="button" role="tab" aria-controls="contactos" aria-selected="false">
+            <i class="bi bi-chat-dots me-2"></i>Mensajes de Contacto
+          </button>
+        </li>
+      </ul>
+
+      <!-- Contenido de las pestañas -->
+      <div class="tab-content" id="myTabContent">
+        <!-- Pestaña de Ventas -->
+        <div class="tab-pane fade show active" id="ventas" role="tabpanel" aria-labelledby="ventas-tab">
+          <!-- Lista de ventas -->
+          @if (ventas.length > 0) {
+            <div class="card bg-secondary border-0 shadow-lg">
+              <div class="table-responsive">
             <table class="table table-dark table-hover mb-0">
               <thead>
                 <tr>
@@ -86,6 +105,54 @@
           No hay ventas que coincidan con el filtro aplicado.
         </div>
       }
+        </div>
+
+        <!-- Pestaña de Contactos -->
+        <div class="tab-pane fade" id="contactos" role="tabpanel" aria-labelledby="contactos-tab">
+          @if (contactos.length > 0) {
+            <div class="card bg-secondary border-0 shadow-lg">
+              <div class="table-responsive">
+                <table class="table table-dark table-hover mb-0">
+                  <thead class="table-dark">
+                    <tr>
+                      <th>Cliente</th>
+                      <th>Email</th>
+                      <th>Asunto</th>
+                      <th>Fecha</th>
+                      <th>Estado</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (contacto of contactos; track contacto.id) {
+                      <tr>
+                        <td>{{ contacto.firstName }} {{ contacto.lastName }}</td>
+                        <td>{{ contacto.email }}</td>
+                        <td>{{ contacto.subject }}</td>
+                        <td>{{ formatearFecha(contacto.fechaCreacion) }}</td>
+                        <td>
+                          <span class="badge p-2" [style.background-color]="obtenerColorEstado(contacto.estado)">
+                            {{ obtenerEstadoContacto(contacto.estado) }}
+                          </span>
+                        </td>
+                        <td>
+                          <button class="btn btn-sm btn-primary" (click)="abrirChat(contacto)">
+                            <i class="bi bi-chat-dots me-1"></i> Chat
+                          </button>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          } @else {
+            <div class="alert alert-secondary border-0">
+              No hay mensajes de contacto disponibles.
+            </div>
+          }
+        </div>
+      </div>
     </div>
   </div>
   
@@ -113,38 +180,55 @@
               <div class="col-md-6">
                 <h6 class="border-bottom border-dark pb-2 mb-3">Comprobante de pago</h6>
                 <div class="text-center">
-                  <img [src]="ventaSeleccionada.comprobantePago" alt="Comprobante de pago" class="img-fluid border border-dark mb-3">
+                  @if (ventaSeleccionada.comprobante && ventaSeleccionada.comprobante !== 'N/A') {
+                    <div class="alert alert-info">
+                      <i class="bi bi-file-earmark-image me-2"></i>
+                      <strong>Archivo:</strong> {{ ventaSeleccionada.comprobante }}
+                    </div>
+                  } @else {
+                    <div class="alert alert-warning">
+                      <i class="bi bi-exclamation-triangle me-2"></i>
+                      No se subió comprobante
+                    </div>
+                  }
                 </div>
               </div>
             </div>
             
-            <h6 class="border-bottom border-dark pb-2 mb-3 mt-4">Productos</h6>
-            <div class="table-responsive">
-              <table class="table table-dark table-sm">
-                <thead>
-                  <tr>
-                    <th scope="col">Producto</th>
-                    <th scope="col" class="text-center">Cantidad</th>
-                    <th scope="col" class="text-end">Precio</th>
-                    <th scope="col" class="text-end">Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @for (producto of ventaSeleccionada.productos; track producto.id) {
+            <h6 class="border-bottom border-dark pb-2 mb-3 mt-4">Productos ({{ ventaSeleccionada.productos.length || 0 }})</h6>
+            @if (ventaSeleccionada.productos && ventaSeleccionada.productos.length > 0) {
+              <div class="table-responsive">
+                <table class="table table-dark table-sm">
+                  <thead>
                     <tr>
-                      <td>{{ producto.nombre }}</td>
-                      <td class="text-center">{{ producto.cantidad }}</td>
-                      <td class="text-end">S/ {{ producto.precio.toFixed(2) }}</td>
-                      <td class="text-end">S/ {{ (producto.precio * producto.cantidad).toFixed(2) }}</td>
+                      <th scope="col">Producto</th>
+                      <th scope="col" class="text-center">Cantidad</th>
+                      <th scope="col" class="text-end">Precio</th>
+                      <th scope="col" class="text-end">Subtotal</th>
                     </tr>
-                  }
-                  <tr>
-                    <td colspan="3" class="text-end fw-bold">Total</td>
-                    <td class="text-end text-success fw-bold">S/ {{ ventaSeleccionada.total.toFixed(2) }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    @for (producto of ventaSeleccionada.productos; track producto.id) {
+                      <tr>
+                        <td>{{ producto.name || 'Sin nombre' }}</td>
+                        <td class="text-center">{{ producto.cantidad || 0 }}</td>
+                        <td class="text-end">S/ {{ (producto.price || 0).toFixed(2) }}</td>
+                        <td class="text-end">S/ {{ ((producto.price || 0) * (producto.cantidad || 0)).toFixed(2) }}</td>
+                      </tr>
+                    }
+                    <tr>
+                      <td colspan="3" class="text-end fw-bold">Total</td>
+                      <td class="text-end text-success fw-bold">S/ {{ ventaSeleccionada.total.toFixed(2) }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            } @else {
+              <div class="alert alert-warning">
+                <i class="bi bi-exclamation-triangle me-2"></i>
+                No hay productos registrados en esta venta.
+              </div>
+            }
           </div>
           <div class="modal-footer bg-dark border-dark">
             @if (ventaSeleccionada.estado === 'pending') {
@@ -166,6 +250,89 @@
                 Cerrar
               </button>
             }
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Modal del Chat -->
+  @if (mostrarModalChat && contactoSeleccionado) {
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark border-dark">
+          <div class="modal-header bg-dark border-dark">
+            <h5 class="modal-title text-light">
+              <i class="bi bi-chat-dots me-2"></i>
+              Chat con {{ contactoSeleccionado.firstName }} {{ contactoSeleccionado.lastName }}
+            </h5>
+            <button type="button" class="btn-close btn-close-white" (click)="cerrarModalChat()"></button>
+          </div>
+          <div class="modal-body bg-dark" style="max-height: 500px; overflow-y: auto;">
+            <!-- Información del contacto -->
+            <div class="card bg-secondary border-0 mb-3">
+              <div class="card-body p-3">
+                <h6 class="card-title text-light">Información del Cliente</h6>
+                <div class="row">
+                  <div class="col-md-6">
+                    <p class="mb-1"><strong>Nombre:</strong> {{ contactoSeleccionado.firstName }} {{ contactoSeleccionado.lastName }}</p>
+                    <p class="mb-1"><strong>Email:</strong> {{ contactoSeleccionado.email }}</p>
+                    <p class="mb-1"><strong>Teléfono:</strong> {{ contactoSeleccionado.phone }}</p>
+                  </div>
+                  <div class="col-md-6">
+                    <p class="mb-1"><strong>Asunto:</strong> {{ contactoSeleccionado.subject }}</p>
+                    <p class="mb-1"><strong>Fecha:</strong> {{ formatearFecha(contactoSeleccionado.fechaCreacion) }}</p>
+                    <p class="mb-1"><strong>Estado:</strong> 
+                      <span class="badge p-1" [style.background-color]="obtenerColorEstado(contactoSeleccionado.estado)">
+                        {{ obtenerEstadoContacto(contactoSeleccionado.estado) }}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mensaje original -->
+            <div class="card bg-primary border-0 mb-3">
+              <div class="card-body p-3">
+                <h6 class="card-title text-light">Mensaje Original</h6>
+                <p class="card-text text-light">{{ contactoSeleccionado.message }}</p>
+              </div>
+            </div>
+
+            <!-- Historial de chat -->
+            <div class="chat-container">
+              @if (mensajesChat.length > 0) {
+                @for (mensaje of mensajesChat; track mensaje.id) {
+                  <div class="message mb-3" [ngClass]="mensaje.remitente === 'cliente' ? 'message-client' : 'message-staff'">
+                    <div class="message-content p-3 rounded" [ngClass]="mensaje.remitente === 'cliente' ? 'bg-info' : 'bg-success'">
+                      <div class="message-header mb-1">
+                        <strong>{{ mensaje.nombreRemitente }}</strong>
+                        <small class="text-muted ms-2">{{ formatearFecha(mensaje.fechaEnvio) }}</small>
+                      </div>
+                      <p class="mb-0">{{ mensaje.mensaje }}</p>
+                    </div>
+                  </div>
+                }
+              } @else {
+                <div class="alert alert-secondary">
+                  No hay mensajes en el chat aún.
+                </div>
+              }
+            </div>
+          </div>
+          <div class="modal-footer bg-dark border-dark">
+            <div class="input-group">
+              <input 
+                type="text" 
+                class="form-control bg-secondary text-light border-secondary" 
+                placeholder="Escribe tu respuesta..." 
+                [(ngModel)]="nuevoMensaje"
+                (keyup.enter)="enviarMensaje()">
+              <button class="btn btn-primary" type="button" (click)="enviarMensaje()" [disabled]="!nuevoMensaje.trim()">
+                <i class="bi bi-send me-1"></i> Enviar
+              </button>
+            </div>
           </div>
         </div>
       </div>

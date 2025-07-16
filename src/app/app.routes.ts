@@ -17,6 +17,7 @@ import { CamarasComponent } from './inicio/camaras/camaras.component';
 import { CarritoComponent } from './compras/carrito/carrito.component';
 import { PasarelaPagosComponent } from './compras/pasarela-pagos/pasarela-pagos.component';
 import { AprobarVentasComponent } from './compras/personal/personal.component'
+import { PedidosComponent } from './compras/pedidos/pedidos.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -37,5 +38,6 @@ export const routes: Routes = [
   { path: 'carrito', component: CarritoComponent},
   { path: 'pasarela-pagos', component: PasarelaPagosComponent},
   { path: 'personal', component: AprobarVentasComponent},
+  { path: 'pedidos', component: PedidosComponent},
   { path: '**', component: NotFoundComponent }, //Este es la ruta comodín, que se ejecuta cuando no se encuentra la ruta solicitada
 ];

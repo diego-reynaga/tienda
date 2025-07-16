@@ -60,7 +60,17 @@
     <div class="form-map-container">
       <!-- Formulario -->
       <div class="form-column">
-        <form (submit)="onSubmit()" #contactForm="ngForm" class="contact-form">
+        @if (!usuario) {
+          <div class="auth-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Debes iniciar sesión para enviar un mensaje</h3>
+            <p>Para contactarnos, necesitas estar autenticado en el sistema.</p>
+            <button class="login-btn" (click)="router.navigate(['/login'])">
+              <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+            </button>
+          </div>
+        } @else {
+          <form (submit)="onSubmit()" #contactForm="ngForm" class="contact-form">
           <div class="form-row">
             <div class="form-group">
               <label for="firstName">Nombre <span class="required">*</span></label>
@@ -110,11 +120,13 @@
                   type="email" 
                   id="email" 
                   name="email" 
-                  ngModel 
+                  [ngModel]="emailUsuario"
                   #email="ngModel"
                   required 
+                  readonly
                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                   [ngClass]="{'input-error': email.invalid && (email.dirty || email.touched)}"
+                  placeholder="Debes iniciar sesión para enviar un mensaje"
                 >
               </div>
               @if (email.invalid && (email.dirty || email.touched)) {
@@ -207,10 +219,14 @@
           <button 
             type="submit" 
             class="submit-button" 
-            [disabled]="!contactForm.valid"
-            [ngClass]="{'button-disabled': !contactForm.valid}"
+            [disabled]="!contactForm.valid || enviandoFormulario"
+            [ngClass]="{'button-disabled': !contactForm.valid || enviandoFormulario}"
           >
-            <i class="fas fa-paper-plane"></i> Enviar Mensaje
+            @if (enviandoFormulario) {
+              <i class="fas fa-spinner fa-spin"></i> Enviando...
+            } @else {
+              <i class="fas fa-paper-plane"></i> Enviar Mensaje
+            }
           </button>
 
           <!-- Mensajes de estado -->
@@ -230,6 +246,7 @@
             }
           </div>
         </form>
+        }
       </div>
 
       <!-- Mapa -->

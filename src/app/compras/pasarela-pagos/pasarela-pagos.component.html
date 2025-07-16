@@ -28,6 +28,13 @@
               </div>
               <div class="step-text">Confirmación</div>
             </div>
+            <div class="step-connector" [class.active]="currentStep >= 4"></div>
+            <div class="step" [class.active]="currentStep >= 4">
+              <div class="step-icon">
+                <i class="bi bi-clock-fill"></i>
+              </div>
+              <div class="step-text">Estado</div>
+            </div>
           </div>
         </div>
 
@@ -221,7 +228,7 @@
               <div class="row align-items-center">
                 <div class="col-md-6 text-center mb-4 mb-md-0">
                   <div class="qr-container p-4 bg-white rounded shadow-sm pulse-animation">
-                    <img src="assets/images/yape-qr.png" alt="Código QR Yape" class="img-fluid yape-qr" style="max-width: 220px;">
+                    <img src="qr-pago-yape.jfif" alt="Código QR Yape" class="img-fluid yape-qr" style="max-width: 220px;">
                   </div>
                   <div class="mt-4">
                     <p class="mb-1 text-uppercase fw-light">Monto a pagar</p>
@@ -334,8 +341,69 @@
           </div>
         }
 
-        <!-- Paso 3: Estado de la compra -->
-        
+        <!-- Paso 4: Estado de la compra -->
+        @if (currentStep === 4) {
+          <div class="card payment-card border-0 shadow-lg animate__animated animate__fadeIn">
+            <div class="card-header bg-gradient py-3">
+              <h3 class="mb-0"><i class="bi bi-clock-fill me-2"></i>Estado de la compra</h3>
+            </div>
+            <div class="card-body p-4 text-center">
+              
+              @if (cargandoCompra) {
+                <div class="loading-state">
+                  <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+                    <span class="visually-hidden">Cargando...</span>
+                  </div>
+                  <h4 class="mb-3">Esperando aprobación...</h4>
+                  <p class="text-muted mb-4">Tu compra está siendo revisada por nuestro equipo. Te notificaremos cuando sea procesada.</p>
+                  <div class="progress mt-4" style="height: 8px;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 50%"></div>
+                  </div>
+                </div>
+              }
+
+              @if (mostrarEstadoCompra && estadoCompraActual === 'approved') {
+                <div class="success-state">
+                  <i class="bi bi-check-circle-fill text-success mb-3" style="font-size: 4rem;"></i>
+                  <h4 class="mb-3 text-success">¡Compra Aprobada!</h4>
+                  <p class="mb-4">Tu pedido ha sido confirmado y está en proceso.</p>
+                  <button class="btn btn-success btn-lg" (click)="limpiarEstadoYRedirigir()">
+                    <i class="bi bi-box-arrow-right me-2"></i>Ver mis pedidos
+                  </button>
+                </div>
+              }
+
+              @if (mostrarEstadoCompra && estadoCompraActual === 'rejected') {
+                <div class="rejected-state">
+                  <i class="bi bi-x-circle-fill text-danger mb-3" style="font-size: 4rem;"></i>
+                  <h4 class="mb-3 text-danger">Compra Rechazada</h4>
+                  <p class="mb-4">Lo sentimos, no se pudo procesar tu pedido. Por favor intenta nuevamente.</p>
+                  <div class="d-flex justify-content-center gap-3">
+                    <button class="btn btn-outline-primary" (click)="continuarComprando()">
+                      <i class="bi bi-arrow-repeat me-2"></i>Intentar de nuevo
+                    </button>
+                    <button class="btn btn-primary" (click)="volverAInicio()">
+                      <i class="bi bi-house-door-fill me-2"></i>Volver al inicio
+                    </button>
+                  </div>
+                </div>
+              }
+
+              @if (!cargandoCompra && !mostrarEstadoCompra) {
+                <div class="waiting-state">
+                  <i class="bi bi-hourglass-split mb-3" style="font-size: 4rem;"></i>
+                  <h4 class="mb-3">Compra enviada</h4>
+                  <p class="mb-4">Tu compra ha sido enviada para revisión. Te notificaremos cuando sea procesada.</p>
+                  <button class="btn btn-primary" (click)="volverAInicio()">
+                    <i class="bi bi-house-door-fill me-2"></i>Volver al inicio
+                  </button>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Paso 3: Confirmación -->
         @if (currentStep === 3) {
   <div class="card payment-card border-0 shadow-lg animate__animated animate__fadeIn">
     <div class="card-header bg-gradient py-3">
